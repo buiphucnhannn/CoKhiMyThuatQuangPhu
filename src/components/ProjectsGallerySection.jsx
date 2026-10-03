@@ -5,6 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ProjectsGallerySection({ onOpenProjectLightbox, onOpenConsultation }) {
   const [scrollIndex, setScrollIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
 
   const projects = [
     {
@@ -69,6 +70,22 @@ export default function ProjectsGallerySection({ onOpenProjectLightbox, onOpenCo
 
   const handleNext = () => {
     setScrollIndex((prev) => Math.min(projects.length - 4, prev + 1));
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    if (diff > 45) {
+      handleNext();
+    } else if (diff < -45) {
+      handlePrev();
+    }
+    setTouchStart(null);
   };
 
   const visibleProjects = projects.slice(scrollIndex, scrollIndex + 4);
@@ -155,13 +172,17 @@ export default function ProjectsGallerySection({ onOpenProjectLightbox, onOpenCo
         {/* ============================================================== */}
         {/* LƯỚI 4 THẺ DỰ ÁN 3D PERSPECTIVE VÒNG CUNG SÂN KHẤU (GIỐNG MẪU 100%) */}
         {/* ============================================================== */}
-        <div className="relative pb-2 sm:pb-3">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4.5 lg:gap-5 xl:gap-6 relative z-10">
+        <div className="reveal-on-scroll reveal-3d-tilt relative pb-2 sm:pb-3">
+          <div
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4.5 lg:gap-5 xl:gap-6 relative z-10"
+          >
             {visibleProjects.map((project, idx) => (
               <div
                 key={project.id}
                 onClick={() => onOpenProjectLightbox?.(project, scrollIndex + idx, projects)}
-                className={`reveal-on-scroll reveal-3d-tilt reveal-delay-${(idx % 4) + 1} group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-3 hover:shadow-[0_25px_50px_rgba(0,0,0,0.4),0_0_30px_rgba(212,175,55,0.45)] ${project.transformClass}`}
+                className={`group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-3 hover:shadow-[0_25px_50px_rgba(0,0,0,0.4),0_0_30px_rgba(212,175,55,0.45)] transition-all duration-300 animate-fadeIn ${project.transformClass}`}
                 style={{
                   aspectRatio: "3/4",
                   boxShadow: "0 18px 36px rgba(0,0,0,0.22), 0 3px 10px rgba(212,175,55,0.18)",
