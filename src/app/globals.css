@@ -1,0 +1,306 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-monument: var(--font-monument), "Cormorant Upright", var(--font-serif), Georgia, serif;
+  
+  --color-brand-red: #C1121F;
+  --color-brand-red-dark: #9E0B0F;
+  --color-brand-gold: #d4af37;
+  --color-brand-gold-light: #f3e5ab;
+  --color-dark-bg: #0C0D10;
+  --color-dark-card: #16171C;
+  --color-ivory-bg: #FAF7F0;
+  --color-ivory-warm: #F5EFE3;
+  --color-crimson: #7C0A0A;
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-monument {
+  font-family: var(--font-monument);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* ====== Glassmorphism helpers ====== */
+.glass-dark {
+  background: rgba(12, 13, 16, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-red {
+  background: linear-gradient(135deg, rgba(193, 18, 31, 0.92) 0%, rgba(158, 11, 15, 0.96) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ====== Gold & Red accents ====== */
+.gold-border {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.gold-glow {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), 0 0 60px rgba(212, 175, 55, 0.08);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #FFF1C5 0%, #D4AF37 50%, #AA8022 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.red-text-gradient {
+  background: linear-gradient(135deg, #FF6B6B 0%, #C1121F 60%, #990000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ====== Paper / Ivory texture ====== */
+.paper-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ====== Scrollbar ====== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0C0D10;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2c33;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C1121F;
+}
+
+/* ====== Animations ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ====== Delay utilities ====== */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ====== Image hover effects ====== */
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.img-hover-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* ====== Selection ====== */
+::selection {
+  background: #C1121F;
+  color: white;
+}
+
+/* ============================================================== */
+/* HỆ THỐNG HIỆU ỨNG CUỘN TRANG BI-DIRECTIONAL (MỖI SECTION MỘT KIỂU) */
+/* ============================================================== */
+/* HỆ THỐNG HIỆU ỨNG CUỘN TRANG BI-DIRECTIONAL (MỖI SECTION MỘT KIỂU) */
+/* ============================================================== */
+.reveal-on-scroll {
+  opacity: 0 !important;
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.95s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform, filter;
+}
+
+/* Khi lọt vào tầm mắt (dù lướt xuống hay lướt lên, mới load hay load lâu) */
+.reveal-on-scroll.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) rotate(0deg) !important;
+  filter: blur(0) !important;
+}
+
+/* Sau khi xuất hiện xong, nếu rê chuột vào thẻ thì hover transform hoạt động mượt mà */
+.reveal-on-scroll.is-revealed:hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease !important;
+  transition-delay: 0s !important;
+}
+
+/* 1. Hiệu ứng trượt từ trái sang (About, Services, Clients, CTA) — Rõ nét, đường trượt 55px */
+.reveal-slide-right {
+  transform: translate3d(-55px, 0, 0);
+}
+
+/* 2. Hiệu ứng trượt từ phải sang (Clients Slogan, CTA Call) — Rõ nét, đường trượt 55px */
+.reveal-slide-left {
+  transform: translate3d(55px, 0, 0);
+}
+
+/* 3. Hiệu ứng nâng bồng bềnh từ dưới lên (Services Cards) — Độ cao 55px */
+.reveal-float-up {
+  transform: translate3d(0, 55px, 0);
+}
+
+/* 4. Hiệu ứng trôi xuống nhẹ nhàng (Headers) */
+.reveal-fade-down {
+  transform: translate3d(0, -40px, 0);
+}
+
+/* 5. Hiệu ứng phóng lớn mở nét từ từ (About Danh ngôn, CTA Center) */
+.reveal-scale-up {
+  transform: scale(0.86) translate3d(0, 35px, 0);
+  filter: blur(5px);
+}
+
+/* 6. Hiệu ứng bật nảy số liệu hoàng gia (Stats Section) */
+.reveal-pop-up {
+  transform: translate3d(0, 60px, 0) scale(0.85);
+  filter: blur(3px);
+  transition-duration: 1s !important;
+  transition-timing-function: cubic-bezier(0.18, 0.9, 0.28, 1.15) !important;
+}
+
+/* 7. Hiệu ứng 3D nghiêng mở không gian nghệ thuật (Projects Gallery Cards) */
+.reveal-3d-tilt {
+  transform: perspective(1000px) translate3d(0, 65px, 0) rotateX(10deg);
+  filter: blur(4px);
+  transition-duration: 1s !important;
+}
+
+/* 8. Hiệu ứng tầng bậc quy trình (Process Steps) */
+.reveal-step-cascade {
+  transform: translate3d(0, 50px, 0) scale(0.88);
+  transition-duration: 0.95s !important;
+}
+
+/* 9. Hiệu ứng thẻ khách hàng (Clients Cards) */
+.reveal-card-shimmer {
+  transform: translate3d(0, 50px, 0) scale(0.90);
+  filter: blur(3px);
+  transition-duration: 0.95s !important;
+}
+
+/* Các nhịp trễ xuất hiện so le (Staggered Delays) */
+.reveal-delay-1 { transition-delay: 0.08s !important; }
+.reveal-delay-2 { transition-delay: 0.22s !important; }
+.reveal-delay-3 { transition-delay: 0.36s !important; }
+.reveal-delay-4 { transition-delay: 0.50s !important; }
+.reveal-delay-5 { transition-delay: 0.64s !important; }
+
