@@ -12,104 +12,118 @@ export default function AboutSection({ onOpenConsultation }) {
   return (
     <section
       id="ve-quang-phu"
-      className="relative w-full overflow-hidden bg-[#FBF7EE] text-zinc-900 select-none z-10"
+      className="relative w-full overflow-hidden text-zinc-900 select-none z-10"
+      style={{
+        background:
+          "linear-gradient(to right, #FBF7EE 0%, #FBF7EE 45%, #940E13 54%, #780B0F 100%)",
+      }}
     >
       {/* ============================================================== */}
-      {/* 1. GIAO DIỆN DESKTOP (>= lg): GIỮ NGUYÊN 100% BANNER WIDESCREEN   */}
+      {/* 1. GIAO DIỆN DESKTOP (>= lg): BANNER WIDESCREEN TỶ LỆ CHUẨN ĐIỆN ẢNH */}
+      {/* Giới hạn chiều rộng tối đa và tỷ lệ chiều cao tối ưu, giữ nguyên vẻ đẹp hoàn hảo ở mọi tỷ lệ scale/zoom */}
       {/* ============================================================== */}
-      <div className="hidden lg:flex relative w-full min-h-[550px] items-center">
-        {/* Nền bức họa mỹ thuật: đường cong chữ S, cờ đỏ và giấy kem */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <img
-            src="/images/generated/about_section_artwork.jpg"
-            alt="Bác Hồ và tinh hoa cơ khí mỹ thuật Quảng Phú"
-            className="w-full h-full object-cover object-[center_center]"
-          />
-        </div>
-
-        {/* Lớp mờ chuyển tiếp tiếp giáp êm ái với Hero (theo 2 nửa màu nền tự nhiên) */}
-        <div
-          className="absolute top-0 inset-x-0 h-9 pointer-events-none z-30"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 42%, rgba(212, 175, 55, 0.65) 45.5%, rgba(165, 18, 24, 0.75) 50%, rgba(181, 24, 28, 0.85) 100%)",
-            backdropFilter: "blur(4px)",
-            WebkitBackdropFilter: "blur(4px)",
-            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-          }}
-        />
-
-        {/* Nội dung chữ trên cánh tả desktop */}
-        <div className="reveal-on-scroll reveal-slide-right relative z-30 w-[46%] xl:w-[42%] flex flex-col justify-center h-full my-auto px-12 xl:px-16 pt-16 pb-12">
-          {/* Eyebrow */}
-          <div className="flex items-center gap-2.5 mb-2">
-            <span className="w-7 h-[2px] bg-[#B5181C] rounded-full" />
-            <span className="text-[#B5181C] text-xs font-extrabold tracking-[0.24em] uppercase">
-              VỀ QUẢNG PHÚ
-            </span>
-            <span className="w-7 h-[2px] bg-[#B5181C] rounded-full" />
+      <div className="hidden lg:flex relative w-full justify-center overflow-hidden">
+        <div className="relative w-full max-w-[1620px] 2xl:max-w-[1720px] min-h-[550px] lg:h-[clamp(560px,36vw,660px)] flex items-center">
+          {/* Nền bức họa mỹ thuật: đường cong chữ S, cờ đỏ và giấy kem */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <img
+              src="/images/generated/about_section_artwork.jpg"
+              alt="Bác Hồ và tinh hoa cơ khí mỹ thuật Quảng Phú"
+              className="w-full h-full object-cover object-[center_center]"
+            />
+            {/* Lớp phủ chuyển sắc mềm mại ở mép hữu để hòa tan tuyệt đối vào nền cờ đỏ phía ngoài khi zoom nhỏ */}
+            <div
+              className="absolute inset-y-0 right-0 w-24 pointer-events-none"
+              style={{
+                background: "linear-gradient(to right, transparent 0%, #780B0F 100%)",
+              }}
+            />
           </div>
 
-          {/* Headline */}
-          <h2 className="font-serif text-[#22130F] font-bold tracking-tight leading-[1.12] text-[34px] lg:text-[40px]">
-            <span className="block">Dấu ấn được tạo nên</span>
-            <span className="block mt-1">từ tay nghề.</span>
-          </h2>
+          {/* Lớp mờ chuyển tiếp tiếp giáp êm ái với Hero (theo 2 nửa màu nền tự nhiên) */}
+          <div
+            className="absolute top-0 inset-x-0 h-9 pointer-events-none z-30"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 42%, rgba(212, 175, 55, 0.65) 45.5%, rgba(165, 18, 24, 0.75) 50%, rgba(181, 24, 28, 0.85) 100%)",
+              backdropFilter: "blur(4px)",
+              WebkitBackdropFilter: "blur(4px)",
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+            }}
+          />
 
-          {/* Đoạn văn giới thiệu */}
-          <p className="mt-3.5 text-[#2B1F19] text-[14.5px] leading-[1.8] max-w-[420px] text-justify font-medium">
-            Hơn cả một đơn vị cơ khí, Quảng Phú là nơi hội tụ của kỹ thuật và mỹ thuật đỉnh cao. Từ các khối xe nghi trượng đại lễ quốc gia đến tượng chân dung truyền thần, chúng tôi luôn đặt sự chính xác, thần thái uy nghiêm và chất lượng trường tồn lên hàng đầu.
-          </p>
+          {/* Nội dung chữ trên cánh tả desktop */}
+          <div className="reveal-on-scroll reveal-slide-right relative z-30 w-[46%] xl:w-[42%] flex flex-col justify-center h-full my-auto px-12 xl:px-16 pt-16 pb-12">
+            {/* Eyebrow */}
+            <div className="flex items-center gap-2.5 mb-2">
+              <span className="w-7 h-[2px] bg-[#B5181C] rounded-full" />
+              <span className="text-[#B5181C] text-xs font-extrabold tracking-[0.24em] uppercase">
+                VỀ QUẢNG PHÚ
+              </span>
+              <span className="w-7 h-[2px] bg-[#B5181C] rounded-full" />
+            </div>
 
-          {/* Nút Tìm hiểu thêm */}
-          <div className="mt-7">
-            <button
-              onClick={onOpenConsultation}
-              className="group inline-flex items-center gap-2.5 px-7 py-2.5 rounded-full font-semibold text-sm text-white transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            {/* Headline */}
+            <h2 className="font-serif text-[#22130F] font-bold tracking-tight leading-[1.12] text-[34px] lg:text-[40px] 2xl:text-[44px]">
+              <span className="block">Dấu ấn được tạo nên</span>
+              <span className="block mt-1">từ tay nghề.</span>
+            </h2>
+
+            {/* Đoạn văn giới thiệu */}
+            <p className="mt-3.5 text-[#2B1F19] text-[14.5px] 2xl:text-[15.5px] leading-[1.8] max-w-[440px] text-justify font-medium">
+              Hơn cả một đơn vị cơ khí, Quảng Phú là nơi hội tụ của kỹ thuật và mỹ thuật đỉnh cao. Từ các khối xe nghi trượng đại lễ quốc gia đến tượng chân dung truyền thần, chúng tôi luôn đặt sự chính xác, thần thái uy nghiêm và chất lượng trường tồn lên hàng đầu.
+            </p>
+
+            {/* Nút Tìm hiểu thêm */}
+            <div className="mt-7">
+              <button
+                onClick={onOpenConsultation}
+                className="group inline-flex items-center gap-2.5 px-7 py-2.5 rounded-full font-semibold text-sm text-white transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                style={{
+                  background: "linear-gradient(135deg, #B5181C 0%, #850E12 100%)",
+                  boxShadow:
+                    "0 6px 20px rgba(181,24,28,0.45), inset 0 1px 0 rgba(255,255,255,0.25)",
+                }}
+              >
+                <span>Tìm hiểu thêm</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </div>
+          </div>
+
+          {/* Cánh hữu: Không gian cho bức họa */}
+          <div className="relative z-10 w-[54%] xl:w-[58%] min-h-full pointer-events-none" />
+
+          {/* Chữ ký thư pháp danh ngôn Bác Hồ góc phải desktop */}
+          <div className="reveal-on-scroll reveal-scale-up absolute bottom-8 right-10 lg:right-14 z-30 pointer-events-none text-right">
+            <p
+              className="text-[#FFE082] text-[21px] lg:text-[23px] leading-snug tracking-wide select-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
               style={{
-                background: "linear-gradient(135deg, #B5181C 0%, #850E12 100%)",
-                boxShadow:
-                  "0 6px 20px rgba(181,24,28,0.45), inset 0 1px 0 rgba(255,255,255,0.25)",
+                fontFamily: 'var(--font-script), "Dancing Script", cursive',
+                fontWeight: 700,
+                textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 16px rgba(212,175,55,0.45)",
               }}
             >
-              <span>Tìm hiểu thêm</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
+              &ldquo;Không có gì quý hơn
+              <br />
+              &nbsp;Độc lập - Tự do!&rdquo;
+            </p>
           </div>
-        </div>
 
-        {/* Cánh hữu: Không gian cho bức họa */}
-        <div className="relative z-10 w-[54%] xl:w-[58%] min-h-full pointer-events-none" />
-
-        {/* Chữ ký thư pháp danh ngôn Bác Hồ góc phải desktop */}
-        <div className="reveal-on-scroll reveal-scale-up absolute bottom-8 right-10 lg:right-14 z-30 pointer-events-none text-right">
-          <p
-            className="text-[#FFE082] text-[21px] lg:text-[23px] leading-snug tracking-wide select-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
+          {/* Lớp mờ chuyển tiếp êm ái chân About với Stats (desktop) */}
+          <div
+            className="absolute bottom-0 inset-x-0 h-9 pointer-events-none z-30"
             style={{
-              fontFamily: 'var(--font-script), "Dancing Script", cursive',
-              fontWeight: 700,
-              textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 16px rgba(212,175,55,0.45)",
+              background:
+                "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 44%, rgba(212, 175, 55, 0.65) 47.5%, rgba(110, 13, 19, 0.75) 52%, rgba(133, 15, 23, 0.85) 100%)",
+              backdropFilter: "blur(4px)",
+              WebkitBackdropFilter: "blur(4px)",
+              maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
             }}
-          >
-            &ldquo;Không có gì quý hơn
-            <br />
-            &nbsp;Độc lập - Tự do!&rdquo;
-          </p>
+          />
         </div>
-
-        {/* Lớp mờ chuyển tiếp êm ái chân About với Stats (desktop) */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-9 pointer-events-none z-30"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 44%, rgba(212, 175, 55, 0.65) 47.5%, rgba(110, 13, 19, 0.75) 52%, rgba(133, 15, 23, 0.85) 100%)",
-            backdropFilter: "blur(4px)",
-            WebkitBackdropFilter: "blur(4px)",
-            maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-            WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-          }}
-        />
       </div>
 
       {/* ============================================================== */}

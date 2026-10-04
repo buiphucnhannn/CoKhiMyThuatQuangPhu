@@ -41,17 +41,19 @@ export default function StatsSection() {
       {/* ============================================================== */}
       {/* LỚP MỜ CHUYỂN TIẾP ÊM ÁI ĐỈNH STATS VỚI ABOUT (THEO 2 NỬA MÀU NỀN TỰ NHIÊN) */}
       {/* ============================================================== */}
-      <div
-        className="absolute top-0 inset-x-0 h-7 sm:h-9 pointer-events-none z-30"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 44%, rgba(212, 175, 55, 0.65) 47.5%, rgba(110, 13, 19, 0.75) 52%, rgba(133, 15, 23, 0.85) 100%)",
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
-          maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-        }}
-      />
+      <div className="absolute top-0 inset-x-0 h-7 sm:h-9 pointer-events-none z-30 flex justify-center">
+        <div
+          className="w-full max-w-[1620px] 2xl:max-w-[1720px] h-full"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 44%, rgba(212, 175, 55, 0.65) 47.5%, rgba(110, 13, 19, 0.75) 52%, rgba(133, 15, 23, 0.85) 100%)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+          }}
+        />
+      </div>
 
       {/* Đường chỉ vàng kim loại mảnh mai chạy dọc tiếp giáp */}
       <div className="absolute top-0 inset-x-0 h-[1.5px] z-30 pointer-events-none">

@@ -89,7 +89,7 @@ export default function HeroSection({ onOpenConsultation }) {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden flex flex-col h-[100svh] min-h-[560px]"
+      className="relative w-full overflow-hidden flex flex-col h-[100svh] min-h-[560px] max-h-[760px] sm:max-h-[820px] lg:max-h-[860px] xl:max-h-[900px] 2xl:max-h-[940px]"
     >
       {/* ===== Background Images with Ken Burns crossfade ===== */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -277,17 +277,19 @@ export default function HeroSection({ onOpenConsultation }) {
       </div>
 
       {/* LỚP MỜ CHUYỂN TIẾP ÊM ÁI CHÂN HERO THEO ĐÚNG 2 NỬA MÀU NỀN CỦA ABOUT */}
-      <div
-        className="absolute bottom-0 inset-x-0 h-7 sm:h-9 pointer-events-none z-30"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 42%, rgba(212, 175, 55, 0.65) 45.5%, rgba(165, 18, 24, 0.75) 50%, rgba(181, 24, 28, 0.85) 100%)",
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
-          maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-          WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-        }}
-      />
+      <div className="absolute bottom-0 inset-x-0 h-7 sm:h-9 pointer-events-none z-30 flex justify-center">
+        <div
+          className="w-full max-w-[1620px] 2xl:max-w-[1720px] h-full"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 42%, rgba(212, 175, 55, 0.65) 45.5%, rgba(165, 18, 24, 0.75) 50%, rgba(181, 24, 28, 0.85) 100%)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+            WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+          }}
+        />
+      </div>
     </section>
   );
 }
