@@ -1,136 +1,67 @@
 "use client";
 
-import { Phone } from "lucide-react";
+import { Phone, MessageSquare } from "lucide-react";
 
-export default function CtaBanner({ onOpenConsultation }) {
+export default function CtaBanner() {
   return (
     <section
       id="cta"
       className="relative w-full text-white overflow-hidden bg-[#2D0407] -mt-[1px]"
     >
-      {/* ============================================================== */}
-      {/* VÒM CONG CHUYỂN TIẾP TỪ KHÁCH HÀNG (TỐI) SANG CTA (ĐỎ SƠN MÀI)  */}
-      {/* ============================================================== */}
-      <div className="w-full pointer-events-none leading-none z-30 relative -mb-[1px]">
-        <svg
-          viewBox="0 0 1440 50"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-[28px] sm:h-[38px] lg:h-[48px] block"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="ctaGoldCurveTrim" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#8A5E10" stopOpacity="0.3" />
-              <stop offset="30%" stopColor="#D4AF37" stopOpacity="0.9" />
-              <stop offset="50%" stopColor="#FFF2B2" stopOpacity="1" />
-              <stop offset="75%" stopColor="#E5C158" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#8A5E10" stopOpacity="0.4" />
-            </linearGradient>
+      {/* Chuyển tiếp êm ái từ section trước sang CTA */}
+      <div
+        className="w-full h-12 sm:h-16 pointer-events-none z-30 relative -mb-[1px]"
+        style={{
+          background:
+            "linear-gradient(to bottom, #111217 0%, rgba(17,18,23,0.6) 40%, rgba(45,4,7,0.85) 75%, #2D0407 100%)",
+        }}
+      />
 
-            <filter id="ctaWaveGlow" x="-10%" y="-80%" width="120%" height="260%">
-              <feDropShadow dx="0" dy="2" stdDeviation="3.5" floodColor="#D4AF37" floodOpacity="0.6" />
-            </filter>
-          </defs>
-
-          {/* Vùng phía trên đường cong: Phủ đồng màu than đen #111217 của ClientsSection */}
-          <path
-            d="M 0 0 H 1440 V 14 C 1220 26, 940 38, 640 38 C 340 38, 140 26, 0 14 Z"
-            fill="#111217"
-          />
-
-          {/* Dải chỉ vàng kim uốn lượn sắc nét */}
-          <path
-            d="M 0 14 C 140 26, 340 38, 640 38 C 940 38, 1220 26, 1440 14"
-            stroke="url(#ctaGoldCurveTrim)"
-            strokeWidth="3.2"
-            strokeLinecap="round"
-            filter="url(#ctaWaveGlow)"
-          />
-
-          {/* Sống sáng kim cương trắng mảnh trên viền vàng */}
-          <path
-            d="M 0 15 C 140 27, 340 39, 640 39 C 940 39, 1220 27, 1440 15"
-            stroke="#FFFFFF"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            opacity="0.45"
-          />
-        </svg>
-      </div>
-
-      {/* ============================================================== */}
-      {/* ẢNH NỀN TOÀN CẢNH ĐỒNG BỘ 100%: TƯỢNG ĐỒNG CHIẾN BINH + LỤA ĐỎ */}
-      {/* Không chắp vá, hòa sắc đồng nhất và cực kỳ sắc nét             */}
-      {/* ============================================================== */}
+      {/* Ảnh nền xưởng sản xuất Quảng Phú tại Bắc Ninh */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
         <img
-          src="/images/generated/cta_banner_master_bg.jpg"
-          alt="Nghệ thuật đúc đồng cơ khí mỹ thuật Quảng Phú"
-          className="w-full h-full object-cover object-[center_35%]"
+          src="/images/1790914284663_3763498134712611457_3763498134712611457_5b4c1d51ed154240eeca8113c1ec2f4b.jpg"
+          alt="Xưởng cơ khí mỹ thuật Quảng Phú tại Bắc Ninh"
+          className="w-full h-full object-cover object-[center_40%]"
         />
-        {/* Lớp phủ chuyển sắc & làm mờ nền nhẹ để chữ nổi bật 100%, không bị chìm */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/35 to-black/50 backdrop-blur-[1.5px]" />
+        {/* Lớp phủ gradient làm mờ nền để chữ nổi bật sắc nét */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/70 backdrop-blur-[1px]" />
       </div>
 
-      {/* ============================================================== */}
-      {/* BỐ CỤC NỘI DUNG: CÂN ĐỐI 3 PHẦN HÀI HÒA & ĐẸP MẮT             */}
-      {/* ============================================================== */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-10 sm:py-14 lg:py-16 relative z-20">
-        {/* ============================================================== */}
-        {/* BỐ CỤC ĐỐI XỨNG HOÀNG GIA: NÚT TRÁI - ĐOẠN Ở GIỮA - NÚT PHẢI */}
-        {/* ============================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-6 lg:gap-4 xl:gap-6">
-          {/* Cột Trái: Nút Gửi yêu cầu tư vấn (Nằm bên trái đoạn ở giữa) */}
-          <div className="reveal-on-scroll reveal-slide-right hidden lg:flex lg:col-span-3 xl:col-span-3 justify-end items-center">
-            <button
-              onClick={onOpenConsultation}
-              className="group w-full max-w-[220px] h-[52px] rounded-full bg-[#FAF7F0] hover:bg-white text-[#680E14] font-bold text-[14px] shadow-[0_8px_25px_rgba(0,0,0,0.6)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.85)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center shrink-0 border border-[#E5C158]/50"
-            >
-              <span>Gửi yêu cầu tư vấn</span>
-            </button>
-          </div>
+      {/* Nội dung chính căn giữa sang trọng */}
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 py-12 sm:py-16 lg:py-20 relative z-20 text-center flex flex-col items-center">
+        <span className="text-[#E5B842] text-[11px] sm:text-xs font-mono font-bold tracking-[0.25em] uppercase mb-3">
+          KẾT NỐI TRỰC TIẾP VỚI NGHỆ NHÂN & KỸ SƯ
+        </span>
 
-          {/* Cột Giữa: Tiêu đề 2 dòng đường hoàng + Phụ đề súc tích (KHÔNG BAO GIỜ RỚT CHỮ) */}
-          <div className="reveal-on-scroll reveal-scale-up lg:col-span-6 xl:col-span-6 text-center flex flex-col items-center px-2 sm:px-4">
-            <h2 className="font-serif text-white font-bold tracking-tight leading-[1.15] text-[25px] xs:text-[28px] sm:text-[34px] lg:text-[40px] drop-shadow-[0_4px_16px_rgba(0,0,0,0.98)] max-w-2xl mx-auto">
-              <span className="block break-words sm:whitespace-normal">Bạn đang có một công trình</span>
-              <span className="block mt-0.5 sm:mt-1 text-[#FFFBF0]">cần được hiện thực hóa?</span>
-            </h2>
+        <h2 className="font-serif text-white font-bold tracking-tight leading-[1.15] text-[26px] xs:text-[30px] sm:text-[38px] lg:text-[44px] drop-shadow-[0_4px_16px_rgba(0,0,0,0.98)] max-w-3xl">
+          <span className="block">Bạn đang có một công trình, dự án</span>
+          <span className="block mt-1 text-[#FFFBF0]">cần được hiện thực hóa?</span>
+        </h2>
 
-            <p className="mt-3.5 sm:mt-4 text-zinc-100 text-[13px] sm:text-[14.5px] leading-relaxed max-w-lg mx-auto font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-              Hãy chia sẻ ý tưởng. Đội ngũ Quảng Phú sẽ tư vấn giải pháp phù hợp về thiết kế, chất liệu, quy mô và ngân sách.
-            </p>
+        <p className="mt-4 text-zinc-200 text-[14px] sm:text-[16px] leading-relaxed max-w-xl font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+          Hãy liên hệ trực tiếp với chúng tôi. Đội ngũ nghệ nhân và kỹ sư Quảng Phú luôn sẵn sàng khảo sát thực địa, lên bản vẽ kỹ thuật 3D và báo giá tối ưu.
+        </p>
 
-            {/* Cụm 2 nút hiển thị cho thiết bị Mobile/Tablet (bố trí 2 bên trái - phải cân xứng) */}
-            <div className="reveal-on-scroll reveal-float-up flex lg:hidden flex-col sm:flex-row items-center justify-center gap-3 mt-6 w-full max-w-sm mx-auto">
-              <button
-                onClick={onOpenConsultation}
-                className="group w-full sm:w-[200px] h-[48px] sm:h-[50px] rounded-full bg-[#FAF7F0] hover:bg-white text-[#680E14] font-bold text-[14px] shadow-[0_8px_25px_rgba(0,0,0,0.6)] transition-all flex items-center justify-center border border-[#E5C158]/50"
-              >
-                <span>Gửi yêu cầu tư vấn</span>
-              </button>
+        {/* Nút liên hệ trực tiếp: Hotline & Zalo */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 w-full sm:w-auto">
+          <a
+            href="tel:0961031318"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#C1121F] hover:bg-[#A30F1A] text-white font-bold text-sm tracking-wide rounded-none shadow-[0_8px_25px_rgba(193,18,31,0.5)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+          >
+            <Phone className="w-4 h-4 fill-current text-[#FFF6D4]" />
+            <span>Gọi ngay Hotline: 0961 031 318</span>
+          </a>
 
-              <a
-                href="tel:0961031318"
-                className="w-full sm:w-[210px] h-[48px] sm:h-[50px] rounded-full bg-[#3B070B]/95 hover:bg-[#520B10] border border-[#8B1E24] hover:border-[#D4AF37] text-white font-semibold text-[14px] shadow-[0_4px_18px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center gap-2"
-              >
-                <Phone className="w-4 h-4 text-[#E5C158] fill-[#E5C158]" />
-                <span>Gọi ngay: 0961 031 318</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Cột Phải: Nút Gọi ngay: 0961 031 318 (Nằm bên phải đoạn ở giữa) */}
-          <div className="reveal-on-scroll reveal-slide-left hidden lg:flex lg:col-span-3 xl:col-span-3 justify-start items-center">
-            <a
-              href="tel:0961031318"
-              className="w-full max-w-[230px] h-[52px] rounded-full bg-[#3B070B]/95 hover:bg-[#520B10] border border-[#8B1E24] hover:border-[#D4AF37] text-white font-semibold text-[14px] shadow-[0_4px_18px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_24px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center justify-center gap-2 shrink-0"
-            >
-              <Phone className="w-4 h-4 text-[#E5C158] fill-[#E5C158]" />
-              <span>Gọi ngay: 0961 031 318</span>
-            </a>
-          </div>
+          <a
+            href="https://zalo.me/0961031318"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#0068FF] hover:bg-[#0055D4] text-white font-bold text-sm tracking-wide rounded-none shadow-[0_8px_25px_rgba(0,104,255,0.4)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+          >
+            <MessageSquare className="w-4 h-4" />
+            <span>Nhắn tin qua Zalo</span>
+          </a>
         </div>
       </div>
     </section>

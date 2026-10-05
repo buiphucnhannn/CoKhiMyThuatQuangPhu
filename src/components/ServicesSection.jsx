@@ -1,171 +1,151 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { SERVICES_DATA } from "@/data/servicesData";
 
 export default function ServicesSection({ onOpenConsultation, onSelectService }) {
-  const services = [
-    {
-      num: "01",
-      title: "Khối xe nghi trượng",
-      desc: "Thiết kế, sản xuất mô hình khối xe nghi trượng phục vụ các sự kiện, đại lễ lớn.",
-      image: "/images/generated/card_xe_nghi_truong_highres.jpg",
-    },
-    {
-      num: "02",
-      title: "Tượng chân dung Chủ tịch Hồ Chí Minh",
-      desc: "Chế tác tượng Bác Hồ đa dạng kích thước cho hội trường, cơ quan, di tích, sự kiện.",
-      image: "/images/generated/card_bac_ho_highres.jpg",
-    },
-    {
-      num: "03",
-      title: "Tượng chân dung thờ (Ông bà, bố mẹ)",
-      desc: "Chế tác tượng thờ tâm linh, chuẩn thần thái theo yêu cầu của gia đình, dòng họ.",
-      image: "/images/generated/card_tuong_tho_highres.jpg",
-    },
-    {
-      num: "04",
-      title: "Tượng quà tặng & Mỹ thuật trang trí",
-      desc: "Tượng lưu niệm, quà tặng cao cấp, các sản phẩm cơ khí mỹ thuật ứng dụng.",
-      image: "/images/generated/card_qua_tang_highres.jpg",
-    },
-  ];
+  const services = SERVICES_DATA;
+
+  // Helper renderer for a single service card
+  const renderCard = (service, originalIndex, delayClass = "") => (
+    <div
+      key={service.num}
+      onClick={() => onSelectService?.(service, originalIndex, services)}
+      className={`reveal-on-scroll reveal-float-up ${delayClass} group cursor-pointer select-none flex flex-col`}
+    >
+      {/* Khung ảnh tỷ lệ 4:3 chuẩn thiết kế kiến trúc, hiển thị trọn vẹn khuôn mặt & thần thái tác phẩm */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-none border border-black/10 group-hover:border-[#B5181C]/50 transition-all duration-500 shadow-[0_8px_24px_rgba(0,0,0,0.06)] group-hover:shadow-[0_16px_38px_rgba(0,0,0,0.14)] bg-[#EFECE6]">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+        />
+        {/* Lớp ánh sáng bóng bẩy khi hover */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 pointer-events-none" />
+      </div>
+
+      {/* Khối chữ bên dưới ảnh: Tiêu đề in hoa đậm nét & Mô tả chi tiết */}
+      <div className="mt-4 sm:mt-5 flex flex-col text-left">
+        {/* Nhãn phân loại nhỏ trang nhã */}
+        <span className="text-[11px] sm:text-[11.5px] font-bold text-[#8C6D23] uppercase tracking-[0.16em] mb-1.5">
+          {service.category}
+        </span>
+
+        {/* Tiêu đề chính in hoa đậm nét chuẩn theo mẫu tham khảo */}
+        <h3 className="font-sans font-bold text-[#1C1917] group-hover:text-[#B5181C] text-[16px] sm:text-[18px] lg:text-[19.5px] leading-snug uppercase tracking-tight transition-colors duration-300">
+          {service.title}
+        </h3>
+
+        {/* Đoạn văn mô tả rõ ràng, trang nhã, dễ đọc */}
+        <p className="mt-2.5 text-[#52453E] text-[13px] sm:text-[14px] leading-[1.75] font-normal text-pretty">
+          {service.summary || service.desc}
+        </p>
+
+        {/* Link chuyển tiếp trực tiếp vào trang chi tiết dịch vụ */}
+        <div className="mt-4 pt-3 border-t border-black/8 flex items-center justify-between">
+          <Link
+            href={`/dich-vu/${service.slug}`}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#B5181C] hover:text-[#800C10] uppercase tracking-wider group/link transition-colors"
+          >
+            <span>Chi tiết dịch vụ</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+          </Link>
+          <span className="text-[11px] font-mono text-zinc-400">
+            Mục {service.num}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section
       id="dich-vu"
-      className="relative w-full text-white pt-7 sm:pt-9 lg:pt-11 pb-10 sm:pb-12 lg:pb-14 overflow-hidden select-none z-10 -mt-[1px] bg-[#1F0E07]"
+      className="relative w-full text-zinc-900 pt-10 sm:pt-14 lg:pt-18 pb-12 sm:pb-16 lg:pb-20 overflow-hidden select-none z-10 -mt-[1px] bg-[#FAF7F0]"
     >
-      {/* Lớp nền nghệ thuật lụa đồng đúc & ánh sáng hổ phách hoàng kim rực rỡ, ấm áp — hòa quyện liền mạch với 2 đường cong viền vàng trên dưới */}
+      {/* LỚP NỀN GIẤY KEM CỔ ĐIỂN VỚI HỌA TIẾT TRỐNG ĐỒNG ĐÔNG SƠN MỜ NHẸ NHÀNG, ĐỒNG BỘ VỚI HỆ THỐNG */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, #1F0E07 0%, rgba(31,14,7,0.18) 14%, rgba(31,14,7,0.04) 50%, rgba(20,9,4,0.18) 86%, #140904 100%), url('/images/generated/services_luxury_bg.jpg') center/cover no-repeat, #140904",
-        }}
-      />
-      {/* Lớp phủ nhẹ giúp nâng cao độ tương phản chữ mà vẫn giữ trọn màu đồng hổ phách */}
-      <div className="absolute inset-0 pointer-events-none bg-black/10 backdrop-blur-[0.5px]" />
-
-      {/* Lớp phủ chuyển sắc dịu nhẹ bên cánh tả giúp chữ luôn nổi bật mà màu đồng hoàng gia vẫn ấm áp rực rỡ */}
-      <div
-        className="absolute inset-y-0 left-0 w-full lg:w-[48%] pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(16,7,3,0.65) 0%, rgba(16,7,3,0.3) 65%, transparent 100%)",
+            "linear-gradient(to bottom, #FAF7F0 0%, rgba(250,247,240,0.95) 25%, rgba(250,247,240,0.92) 75%, #FAF7F0 100%)",
         }}
       />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-2 sm:pt-4 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          {/* ============================================================== */}
-          {/* CÁNH TẢ: TIÊU ĐỀ & ĐOẠN GIỚI THIỆU & NÚT HÀNH ĐỘNG             */}
-          {/* ============================================================== */}
-          <div className="reveal-on-scroll reveal-slide-right relative lg:col-span-4 xl:col-span-4 flex flex-col items-start pr-0 lg:pr-2">
-            {/* Quầng tối khuếch tán tự nhiên phía sau giúp khối chữ nổi bật 100% trên nền tranh đồng, hoàn toàn không cần badge */}
-            <div
-              className="absolute -inset-x-8 -inset-y-10 pointer-events-none -z-10 rounded-full blur-3xl opacity-85"
-              style={{
-                background:
-                  "radial-gradient(ellipse 110% 90% at 30% 40%, rgba(12, 4, 2, 0.92) 0%, rgba(18, 7, 3, 0.65) 55%, transparent 85%)",
-              }}
-            />
+      {/* Vân hoa văn mờ nhung ấm cúng */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-multiply bg-[radial-gradient(#C2932B_1px,transparent_1px)] [background-size:24px_24px]" />
 
-            {/* Tag nhãn vàng ánh kim sáng rực rỡ */}
-            <span
-              className="text-[#FFE28A] text-[11px] sm:text-xs font-extrabold tracking-[0.24em] uppercase mb-1.5 sm:mb-2"
-              style={{
-                textShadow: "0 2px 8px rgba(0,0,0,1), 0 1px 3px #000, 0 0 12px rgba(212,175,55,0.4)",
-              }}
-            >
-              DỊCH VỤ CỦA CHÚNG TÔI
-            </span>
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 relative z-20">
+        {/* ============================================================== */}
+        {/* HÀNG TIÊU ĐỀ SECTION: RÕ RÀNG, ĐẲNG CẤP THEO STYLE THAM KHẢO  */}
+        {/* ============================================================== */}
+        <div className="reveal-on-scroll reveal-slide-right flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14 lg:mb-18">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2.5 mb-2.5">
+              <span className="w-6 h-[2px] bg-[#B5181C]" />
+              <span className="text-[#B5181C] text-[11px] sm:text-xs font-extrabold tracking-[0.24em] uppercase">
+                LĨNH VỰC HOẠT ĐỘNG
+              </span>
+            </div>
 
-            {/* Tiêu đề chính 3 dòng sang trọng, nổi bật tuyệt đối */}
-            <h2
-              className="font-serif text-white font-bold tracking-tight leading-[1.12] text-[28px] sm:text-[34px] lg:text-[40px]"
-              style={{
-                textShadow:
-                  "0 3px 6px rgba(0,0,0,1), 0 8px 24px rgba(0,0,0,0.95), 0 0 35px rgba(0,0,0,0.85)",
-              }}
-            >
-              <span className="block drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Chế tác</span>
-              <span className="block mt-0.5 sm:mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">những giá trị</span>
-              <span className="block mt-0.5 sm:mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">vượt thời gian.</span>
+            <h2 className="font-serif sm:font-sans text-[#1C1917] font-bold tracking-tight text-[30px] sm:text-[40px] lg:text-[46px] leading-[1.14]">
+              Các dịch vụ của chúng tôi
             </h2>
 
-            {/* Đoạn văn mô tả rõ nét, sáng trắng ngà */}
-            <p
-              className="mt-4 sm:mt-5 text-[13px] sm:text-[14px] text-zinc-100 leading-[1.75] font-normal max-w-[390px] text-pretty"
-              style={{
-                textShadow: "0 2px 6px rgba(0,0,0,1), 0 1px 3px #000",
-              }}
-            >
-              Cung cấp giải pháp cơ khí mỹ thuật toàn diện, từ thiết kế, chế tác đến hoàn thiện, đáp ứng đa dạng nhu cầu của khách&nbsp;hàng.
+            <p className="mt-3 text-[#5A4D46] text-[13.5px] sm:text-[15px] leading-[1.75]">
+              Cung cấp giải pháp cơ khí mỹ thuật toàn diện từ phác thảo ý tưởng, đúc đồng nguyên khối truyền thống đến hoàn thiện công trình quy mô quốc gia.
             </p>
-
-            {/* Nút Xem tất cả dịch vụ (Pill đỏ thắm sang trọng) */}
-            <button
-              onClick={onOpenConsultation}
-              className="mt-6 sm:mt-8 group inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-full text-white font-semibold text-[13.5px] sm:text-[14px] transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-lg w-full sm:w-auto"
-              style={{
-                background: "linear-gradient(135deg, #B5181C 0%, #850E12 100%)",
-                boxShadow: "0 6px 20px rgba(181,24,28,0.45), inset 0 1px 0 rgba(255,255,255,0.25)",
-              }}
-            >
-              <span>Xem tất cả dịch vụ</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
           </div>
 
-          {/* ============================================================== */}
-          {/* CÁNH HỮU: 4 THẺ DỊCH VỤ RÕ NÉT, KÍCH THƯỚC LỚN CHUẨN MẪU      */}
-          {/* ============================================================== */}
-          <div className="lg:col-span-8 xl:col-span-8">
-            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4.5">
-              {services.map((item, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => onSelectService?.(item, idx, services)}
-                  className={`reveal-on-scroll reveal-float-up reveal-delay-${idx + 1} group relative rounded-2xl overflow-hidden cursor-pointer bg-[#13141C]/90 backdrop-blur-md border border-white/15 hover:border-[#D4AF37]/80 hover:-translate-y-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.7)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_24px_rgba(212,175,55,0.3)] flex flex-col justify-between h-[350px] sm:h-[425px] lg:h-[445px]`}
-                >
-                  {/* Con số vàng kim ở góc trên bên trái */}
-                  <div className="relative z-10 px-4 pt-3.5 pb-1 flex items-center justify-between">
-                    <span className="font-serif font-bold text-[30px] sm:text-[34px] text-[#D4AF37] tracking-tight leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                      {item.num}
-                    </span>
-                  </div>
+          <Link
+            href="/dich-vu"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-black/5 hover:bg-[#B5181C] text-[#1C1917] hover:text-white border border-black/10 hover:border-[#B5181C] transition-all text-xs font-semibold uppercase tracking-wider rounded-none shrink-0 w-fit"
+          >
+            <span>Trang tổng hợp dịch vụ</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
 
-                  {/* Ảnh minh họa tác phẩm dịch vụ (Độ nét cao, không bị vỡ/mờ) */}
-                  <div className="relative w-full flex-1 mx-auto my-1 px-3 overflow-hidden">
-                    <div className="w-full h-full rounded-xl overflow-hidden bg-black/50 relative">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover object-top group-hover:scale-106 transition-transform duration-500 ease-out"
-                      />
-                      {/* Chuyển sắc chân ảnh mềm mại vào khối mô tả */}
-                      <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#13141C] via-[#13141C]/70 to-transparent" />
-                    </div>
-                  </div>
-
-                  {/* Tiêu đề & mô tả ngắn bên dưới */}
-                  <div className="relative z-10 px-4 pb-4 pt-1 flex flex-col justify-start">
-                    <h3 className="font-sans font-bold text-white text-[14px] sm:text-[15px] leading-snug group-hover:text-[#FDE8B5] transition-colors drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1.5 text-zinc-300 text-[11.5px] sm:text-[12px] leading-relaxed line-clamp-3">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* ============================================================== */}
+        {/* BỐ CỤC 2 CỘT SO-LE (STAGGERED MASONRY) TRÊN DESKTOP (>= md)    */}
+        {/* Cột phải trễ xuống rõ rệt đúng chuẩn thiết kế tham khảo         */}
+        {/* ============================================================== */}
+        <div className="hidden md:grid md:grid-cols-2 gap-x-10 lg:gap-x-16 xl:gap-x-20">
+          {/* CỘT TẢ (Dịch vụ 1 & Dịch vụ 3) */}
+          <div className="flex flex-col space-y-14 lg:space-y-20">
+            {renderCard(services[0], 0, "reveal-delay-1")}
+            {renderCard(services[2], 2, "reveal-delay-3")}
           </div>
+
+          {/* CỘT HỮU: BẮT ĐẦU TRỄ XUỐNG DƯỚI (Dịch vụ 2 & Dịch vụ 4) */}
+          <div className="flex flex-col space-y-14 lg:space-y-20 pt-24 lg:pt-36">
+            {renderCard(services[1], 1, "reveal-delay-2")}
+            {renderCard(services[3], 3, "reveal-delay-4")}
+          </div>
+        </div>
+
+        {/* ============================================================== */}
+        {/* GIAO DIỆN MOBILE (< md): 1 CỘT XẾP THẲNG TỰ NHIÊN DỄ ĐỌC       */}
+        {/* ============================================================== */}
+        <div className="flex flex-col space-y-10 md:hidden">
+          {services.map((service, idx) =>
+            renderCard(service, idx, `reveal-delay-${idx + 1}`)
+          )}
         </div>
       </div>
 
-      {/* Kết thúc lưới dịch vụ — divider cong nằm ở đầu Quy Trình để phần dưới cong lấy trọn nền giấy + vân thủy mặc, không còn dải trắng mất nền */}
-
+      {/* ============================================================== */}
+      {/* CHUYỂN TIẾP ÊM DỊU HÒA QUYỆN SANG KHÁCH HÀNG (#111217)       */}
+      {/* ============================================================== */}
+      <div
+        className="w-full h-16 sm:h-24 pointer-events-none z-20 relative -mb-[1px]"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 0%, rgba(17,18,23,0.35) 40%, rgba(17,18,23,0.85) 75%, #111217 100%)",
+        }}
+      />
     </section>
   );
 }

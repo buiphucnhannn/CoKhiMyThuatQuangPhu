@@ -39,33 +39,15 @@ export default function StatsSection() {
       }}
     >
       {/* ============================================================== */}
-      {/* LỚP MỜ CHUYỂN TIẾP ÊM ÁI ĐỈNH STATS VỚI ABOUT (THEO 2 NỬA MÀU NỀN TỰ NHIÊN) */}
+      {/* LỚP MỜ CHUYỂN TIẾP ÊM ÁI ĐỈNH STATS VỚI SECTION PHÍA TRÊN      */}
       {/* ============================================================== */}
-      <div className="absolute top-0 inset-x-0 h-7 sm:h-9 pointer-events-none z-30 flex justify-center">
-        <div
-          className="w-full max-w-[1620px] 2xl:max-w-[1720px] h-full"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 44%, rgba(212, 175, 55, 0.65) 47.5%, rgba(110, 13, 19, 0.75) 52%, rgba(133, 15, 23, 0.85) 100%)",
-            backdropFilter: "blur(4px)",
-            WebkitBackdropFilter: "blur(4px)",
-            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-          }}
-        />
-      </div>
-
-      {/* Đường chỉ vàng kim loại mảnh mai chạy dọc tiếp giáp */}
-      <div className="absolute top-0 inset-x-0 h-[1.5px] z-30 pointer-events-none">
-        <div
-          className="w-full h-full"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.3) 15%, #FFEAA7 50%, rgba(212,175,55,0.3) 85%, transparent 100%)",
-            boxShadow: "0 0 8px rgba(229,184,66,0.5)",
-          }}
-        />
-      </div>
+      <div
+        className="absolute top-0 inset-x-0 h-10 sm:h-14 pointer-events-none z-30"
+        style={{
+          background:
+            "linear-gradient(to bottom, #0A0B0E 0%, rgba(10,11,14,0.6) 40%, transparent 100%)",
+        }}
+      />
 
       {/* ============================================================== */}
       {/* HOA VĂN TRỐNG ĐỒNG ĐÔNG SƠN CHÌM DÁT VÀNG HOÀNG GIA             */}
@@ -73,7 +55,7 @@ export default function StatsSection() {
       {/* Trống đồng cánh tả */}
       <div className="absolute -left-12 sm:left-4 top-1/2 -translate-y-1/2 w-64 h-64 sm:w-88 sm:h-88 rounded-full overflow-hidden pointer-events-none opacity-20 mix-blend-screen filter saturate-150">
         <img
-          src="/images/generated/trong_dong.jpg"
+          src="/images/1790914174362_3763498134712611457_3763498134712611457_496323da53e09bf68a8fe6497aef4e68.jpg"
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"
@@ -83,7 +65,7 @@ export default function StatsSection() {
       {/* Trống đồng cánh hữu */}
       <div className="absolute -right-16 top-1/2 -translate-y-1/2 w-72 h-72 sm:w-96 sm:h-96 rounded-full overflow-hidden pointer-events-none opacity-15 mix-blend-screen filter saturate-150">
         <img
-          src="/images/generated/trong_dong.jpg"
+          src="/images/1790914174362_3763498134712611457_3763498134712611457_496323da53e09bf68a8fe6497aef4e68.jpg"
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"
@@ -149,80 +131,15 @@ export default function StatsSection() {
       </div>
 
       {/* ============================================================== */}
-      {/* ĐƯỜNG LƯỢN SÓNG CHỮ S LỤA NGHỆ THUẬT & VIỀN VÀNG KIM NỐI DỰ ÁN */}
+      {/* CHUYỂN TIẾP MỀM MẠI TỰ NHIÊN ĐÁY STATS VÀO DỰ ÁN NỔI BẬT         */}
       {/* ============================================================== */}
-      <div className="absolute bottom-0 inset-x-0 pointer-events-none z-30">
-        <svg
-          viewBox="0 0 1440 90"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-12 sm:h-16 lg:h-20 block"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="statsBottomGoldTrim" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#9E6D14" stopOpacity="0.85" />
-              <stop offset="18%" stopColor="#FFF7DA" stopOpacity="1" />
-              <stop offset="45%" stopColor="#D4AF37" stopOpacity="1" />
-              <stop offset="75%" stopColor="#FFEAA7" stopOpacity="1" />
-              <stop offset="100%" stopColor="#7E520A" stopOpacity="0.95" />
-            </linearGradient>
-
-            <filter id="bottomWaveGlow" x="-10%" y="-40%" width="120%" height="200%">
-              <feDropShadow dx="0" dy="2" stdDeviation="5" floodColor="#D4AF37" floodOpacity="0.75" />
-            </filter>
-
-            {/* Pattern tranh thủy mặc ăn khớp tuyệt đối với Dự án bên dưới */}
-            <pattern id="statsWaveInkWash" patternUnits="userSpaceOnUse" width="1440" height="900" x="0" y="0">
-              <image
-                href="/images/generated/projects_ink_wash_bg.jpg"
-                width="1440"
-                height="900"
-                preserveAspectRatio="xMidYMid slice"
-                opacity="0.45"
-              />
-            </pattern>
-          </defs>
-
-          {/* Dải giấy kem cuộn lên tạo đường lượn sóng chữ S tự nhiên chuyển vào Dự Án */}
-          <path
-            d="M 0 90 L 0 40 C 220 58, 420 82, 680 82 C 1000 82, 1260 44, 1440 22 L 1440 90 Z"
-            fill="#FAF7F0"
-          />
-
-          {/* Lớp vân tranh thủy mặc đồng điệu liền mạch vào Dự Án */}
-          <path
-            d="M 0 90 L 0 40 C 220 58, 420 82, 680 82 C 1000 82, 1260 44, 1440 22 L 1440 90 Z"
-            fill="url(#statsWaveInkWash)"
-          />
-
-          {/* Lớp bóng đổ mềm mại dưới viền dải lụa */}
-          <path
-            d="M 0 42 C 220 60, 420 84, 680 84 C 1000 84, 1260 46, 1440 24"
-            stroke="rgba(0,0,0,0.32)"
-            strokeWidth="5"
-            strokeLinecap="round"
-          />
-
-          {/* Sợi ruy băng chỉ vàng kim loại uốn lượn sắc sảo */}
-          <path
-            d="M 0 39 C 220 57, 420 81, 680 81 C 1000 81, 1260 43, 1440 21"
-            stroke="url(#statsBottomGoldTrim)"
-            strokeWidth="3.4"
-            strokeLinecap="round"
-            filter="url(#bottomWaveGlow)"
-          />
-
-          {/* Điểm sáng kim cương trên sống viền vàng */}
-          <path
-            d="M 0 38 C 220 56, 420 80, 680 80 C 1000 80, 1260 42, 1440 20"
-            stroke="#FFFFFF"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            opacity="0.85"
-          />
-        </svg>
-      </div>
+      <div
+        className="absolute bottom-0 inset-x-0 h-12 sm:h-16 lg:h-20 pointer-events-none z-30"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 0%, rgba(88,8,12,0.3) 25%, rgba(250,247,240,0.6) 75%, #FAF7F0 100%)",
+        }}
+      />
     </section>
   );
 }

@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { X, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 
 export default function ProjectLightboxModal({
   project,
   items = [],
   currentIndex = 0,
   onClose,
-  onOpenConsultation,
   onNavigate,
 }) {
   // Use either the items array with currentIndex, or fallback to single project object
@@ -144,7 +143,7 @@ export default function ProjectLightboxModal({
       {/* Modal Container */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl bg-[#16171B] border border-white/20 rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col"
+        className="relative w-full max-w-4xl bg-[#16171B] border border-white/20 rounded-none overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col"
       >
         {/* Header bar: Counter & Close button */}
         <div className="absolute top-4 inset-x-4 z-40 flex items-center justify-between pointer-events-none">
@@ -240,20 +239,17 @@ export default function ProjectLightboxModal({
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto">
-            <button
-              onClick={() => {
-                onClose?.();
-                onOpenConsultation?.();
-              }}
-              className="w-full sm:w-auto px-6 py-3 rounded-full text-white font-bold text-xs sm:text-sm shadow-lg flex items-center justify-center gap-2 transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+            <a
+              href="tel:0961031318"
+              className="w-full sm:w-auto px-6 py-3 rounded-none text-white font-bold text-xs sm:text-sm shadow-lg flex items-center justify-center gap-2 transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
               style={{
                 background: "linear-gradient(135deg, #B5181C 0%, #850E12 100%)",
                 boxShadow: "0 6px 20px rgba(181,24,28,0.45)",
               }}
             >
-              <span>Tư vấn dự án tương tự</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <Phone className="w-4 h-4 fill-current text-[#FFE8A3]" />
+              <span>Hotline: 0961 031 318</span>
+            </a>
           </div>
         </div>
       </div>

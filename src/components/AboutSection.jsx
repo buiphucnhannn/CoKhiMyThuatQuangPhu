@@ -1,230 +1,218 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Maximize2 } from "lucide-react";
+import ProjectLightboxModal from "@/components/ProjectLightboxModal";
 
-/**
- * About Section — "Về Quảng Phú"
- * - Nối tiếp mượt mà từ Hero với lớp mờ chuyển tiếp êm dịu, không vết cắt cứng.
- * - Toàn vẹn bố cục nghệ thuật: cờ đỏ sao vàng, tượng Bác Hồ, các khung ảnh nghệ nhân, nút hành động.
- * - Danh ngôn thư pháp ở góc hữu trang nhã, đúng phong cách truyền thống.
- */
-export default function AboutSection({ onOpenConsultation }) {
+// 14 ẢNH THỰC TẾ DO NGƯỜI DÙNG CHUẨN BỊ SẴN TRONG THƯ MỤC PUBLIC/IMAGES
+// TUYỆT ĐỐI KHÔNG SỬ DỤNG ẢNH AI GENERATED
+const USER_PREPARED_IMAGES = [
+  {
+    url: "/images/1790914174255_3763498134712611457_3763498134712611457_0f99173e49b66b0cdab3a7e22a6b3eba.jpg",
+    title: "Khối xe nghi trượng Đại lễ kỷ niệm cấp Quốc gia",
+    tilt: "-rotate-5",
+  },
+  {
+    url: "/images/1790914174280_3763498134712611457_3763498134712611457_f4251df77b0e623de3471c6cc5f761b7.jpg",
+    title: "Tạo hình khối Quốc huy và biểu tượng mặt tiền xe",
+    tilt: "rotate-3",
+  },
+  {
+    url: "/images/1790914174295_3763498134712611457_3763498134712611457_65c9531735dc897b8ae5cb25e453adec.jpg",
+    title: "Nghệ nhân trực tiếp chạm tỉa chi tiết phôi đồng",
+    tilt: "-rotate-2",
+  },
+  {
+    url: "/images/1790914174307_3763498134712611457_3763498134712611457_ac5b4699dd9463fc0898c16d464020e3.jpg",
+    title: "Đoàn xe diễu hành trang trọng qua Quảng trường Ba Đình",
+    tilt: "rotate-4",
+  },
+  {
+    url: "/images/1790914174319_3763498134712611457_3763498134712611457_86cca0ea55744505a15cf676c523fb04.jpg",
+    title: "Gia công kết cấu thép chịu lực tại xưởng Bắc Ninh",
+    tilt: "-rotate-4",
+  },
+  {
+    url: "/images/1790914174331_3763498134712611457_3763498134712611457_7ddc2411d84842ef2995298f982feedb.jpg",
+    title: "Khối biểu tượng hoa văn diễu hành rực rỡ cờ hoa",
+    tilt: "rotate-2",
+  },
+  {
+    url: "/images/1790914174350_3763498134712611457_3763498134712611457_e0bc90fe367a199a133a997b52380a30.jpg",
+    title: "Kiểm tra kỹ thuật xuất xưởng khối xe diễu binh",
+    tilt: "-rotate-6",
+  },
+  {
+    url: "/images/1790914174362_3763498134712611457_3763498134712611457_496323da53e09bf68a8fe6497aef4e68.jpg",
+    title: "Chạm khắc phù điêu và hoa văn đúc nổi tinh xảo",
+    tilt: "rotate-3",
+  },
+  {
+    url: "/images/1790914174375_3763498134712611457_3763498134712611457_e54ab99a13033bf058f6a1c62b99828e.jpg",
+    title: "Lắp ráp hoàn thiện các module cơ khí mỹ thuật",
+    tilt: "-rotate-1",
+  },
+  {
+    url: "/images/1790914174385_3763498134712611457_3763498134712611457_659d4f59ffc7c4f64e05689299e707d4.jpg",
+    title: "Tác phẩm tượng chân dung lãnh tụ và tượng đài",
+    tilt: "rotate-5",
+  },
+  {
+    url: "/images/1790914174396_3763498134712611457_3763498134712611457_88465772e0f63b0290fad15019a4f903.jpg",
+    title: "Kiểm tra vận hành thực địa trên lộ trình diễu hành",
+    tilt: "-rotate-3",
+  },
+  {
+    url: "/images/1790914284640_3763498134712611457_3763498134712611457_9b97be04c8e4495ab8dbf300e3db4602.jpg",
+    title: "Bàn giao khối xe nghi trượng phục vụ sự kiện trọng đại",
+    tilt: "rotate-4",
+  },
+  {
+    url: "/images/1790914284663_3763498134712611457_3763498134712611457_5b4c1d51ed154240eeca8113c1ec2f4b.jpg",
+    title: "Quy mô nhà xưởng cẩu trục tải trọng lớn tại Quảng Phú",
+    tilt: "-rotate-4",
+  },
+  {
+    url: "/images/1790914284678_3763498134712611457_3763498134712611457_ba3694066fc6577396aa5602364d4310.jpg",
+    title: "Khối xe diễu hành trong niềm hân hoan của nhân dân",
+    tilt: "rotate-2",
+  },
+];
+
+export default function AboutSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [lightboxData, setLightboxData] = useState({
+    isOpen: false,
+    items: [],
+    currentIndex: 0,
+  });
+
+  const totalImages = USER_PREPARED_IMAGES.length;
+
+  // Tự động lướt ảnh qua mỗi 4s đúng theo yêu cầu của người dùng
+  useEffect(() => {
+    if (isHovered) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalImages);
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [isHovered, totalImages]);
+
+  const handleOpenLightbox = (index) => {
+    const formatted = USER_PREPARED_IMAGES.map((img) => ({
+      title: img.title,
+      subtitle: "Cơ Khí Mỹ Thuật Quảng Phú",
+      desc: "Hình ảnh thực tế công trình sản xuất và thi công",
+      image: img.url,
+    }));
+    setLightboxData({
+      isOpen: true,
+      items: formatted,
+      currentIndex: index,
+    });
+  };
+
+  // Mảng nhân đôi để tạo hiệu ứng lướt mượt mà liên tục
+  const displayedImages = [...USER_PREPARED_IMAGES, ...USER_PREPARED_IMAGES];
+
   return (
     <section
       id="ve-quang-phu"
-      className="relative w-full overflow-hidden text-zinc-900 select-none z-10"
-      style={{
-        background:
-          "linear-gradient(to right, #FBF7EE 0%, #FBF7EE 45%, #940E13 54%, #780B0F 100%)",
-      }}
+      className="relative w-full bg-[#0A0B0E] text-white min-h-[100dvh] flex flex-col justify-center overflow-hidden select-none z-10 pt-16 sm:pt-20 pb-20 sm:pb-28 lg:pb-32"
     >
-      {/* ============================================================== */}
-      {/* 1. GIAO DIỆN DESKTOP (>= lg): BANNER WIDESCREEN TỶ LỆ CHUẨN ĐIỆN ẢNH */}
-      {/* Giới hạn chiều rộng tối đa và tỷ lệ chiều cao tối ưu, giữ nguyên vẻ đẹp hoàn hảo ở mọi tỷ lệ scale/zoom */}
-      {/* ============================================================== */}
-      <div className="hidden lg:flex relative w-full justify-center overflow-hidden">
-        <div className="relative w-full max-w-[1620px] 2xl:max-w-[1720px] min-h-[550px] lg:h-[clamp(560px,36vw,660px)] flex items-center">
-          {/* Nền bức họa mỹ thuật: đường cong chữ S, cờ đỏ và giấy kem */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* Quầng sáng đỏ mờ tinh tế phía sau */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-[#C1121F]/15 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center w-full my-auto">
+        {/* ============================================================== */}
+        {/* 1. KHỐI LOGO & TÊN THƯƠNG HIỆU THEO CHUẨN MẪU SUNBRIGHT        */}
+        {/* (Quảng Phú \n Make Difference)                                 */}
+        {/* ============================================================== */}
+        <div className="reveal-on-scroll reveal-scale-up flex flex-col items-center justify-center">
+          {/* Logo thương hiệu đỏ */}
+          <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 relative mb-2.5 sm:mb-3">
             <img
-              src="/images/generated/about_section_artwork.jpg"
-              alt="Bác Hồ và tinh hoa cơ khí mỹ thuật Quảng Phú"
-              className="w-full h-full object-cover object-[center_center]"
-            />
-            {/* Lớp phủ chuyển sắc mềm mại ở mép hữu để hòa tan tuyệt đối vào nền cờ đỏ phía ngoài khi zoom nhỏ */}
-            <div
-              className="absolute inset-y-0 right-0 w-24 pointer-events-none"
-              style={{
-                background: "linear-gradient(to right, transparent 0%, #780B0F 100%)",
-              }}
+              src="/images/logo_brand.png"
+              alt="Cơ Khí Mỹ Thuật Quảng Phú"
+              className="w-full h-full object-contain filter drop-shadow-[0_4px_18px_rgba(193,18,31,0.65)] hover:scale-105 transition-transform duration-300"
             />
           </div>
 
-          {/* Lớp mờ chuyển tiếp tiếp giáp êm ái với Hero (theo 2 nửa màu nền tự nhiên) */}
-          <div
-            className="absolute top-0 inset-x-0 h-9 pointer-events-none z-30"
-            style={{
-              background:
-                "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 42%, rgba(212, 175, 55, 0.65) 45.5%, rgba(165, 18, 24, 0.75) 50%, rgba(181, 24, 28, 0.85) 100%)",
-              backdropFilter: "blur(4px)",
-              WebkitBackdropFilter: "blur(4px)",
-              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-            }}
-          />
-
-          {/* Nội dung chữ trên cánh tả desktop */}
-          <div className="reveal-on-scroll reveal-slide-right relative z-30 w-[46%] xl:w-[42%] flex flex-col justify-center h-full my-auto px-12 xl:px-16 pt-16 pb-12">
-            {/* Eyebrow */}
-            <div className="flex items-center gap-2.5 mb-2">
-              <span className="w-7 h-[2px] bg-[#B5181C] rounded-full" />
-              <span className="text-[#B5181C] text-xs font-extrabold tracking-[0.24em] uppercase">
-                VỀ QUẢNG PHÚ
-              </span>
-              <span className="w-7 h-[2px] bg-[#B5181C] rounded-full" />
-            </div>
-
-            {/* Headline */}
-            <h2 className="font-serif text-[#22130F] font-bold tracking-tight leading-[1.12] text-[34px] lg:text-[40px] 2xl:text-[44px]">
-              <span className="block">Dấu ấn được tạo nên</span>
-              <span className="block mt-1">từ tay nghề.</span>
-            </h2>
-
-            {/* Đoạn văn giới thiệu */}
-            <p className="mt-3.5 text-[#2B1F19] text-[14.5px] 2xl:text-[15.5px] leading-[1.8] max-w-[440px] text-justify font-medium">
-              Hơn cả một đơn vị cơ khí, Quảng Phú là nơi hội tụ của kỹ thuật và mỹ thuật đỉnh cao. Từ các khối xe nghi trượng đại lễ quốc gia đến tượng chân dung truyền thần, chúng tôi luôn đặt sự chính xác, thần thái uy nghiêm và chất lượng trường tồn lên hàng đầu.
-            </p>
-
-            {/* Nút Tìm hiểu thêm */}
-            <div className="mt-7">
-              <button
-                onClick={onOpenConsultation}
-                className="group inline-flex items-center gap-2.5 px-7 py-2.5 rounded-full font-semibold text-sm text-white transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-                style={{
-                  background: "linear-gradient(135deg, #B5181C 0%, #850E12 100%)",
-                  boxShadow:
-                    "0 6px 20px rgba(181,24,28,0.45), inset 0 1px 0 rgba(255,255,255,0.25)",
-                }}
-              >
-                <span>Tìm hiểu thêm</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-            </div>
-          </div>
-
-          {/* Cánh hữu: Không gian cho bức họa */}
-          <div className="relative z-10 w-[54%] xl:w-[58%] min-h-full pointer-events-none" />
-
-          {/* Chữ ký thư pháp danh ngôn Bác Hồ góc phải desktop */}
-          <div className="reveal-on-scroll reveal-scale-up absolute bottom-8 right-10 lg:right-14 z-30 pointer-events-none text-right">
-            <p
-              className="text-[#FFE082] text-[21px] lg:text-[23px] leading-snug tracking-wide select-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
-              style={{
-                fontFamily: 'var(--font-script), "Dancing Script", cursive',
-                fontWeight: 700,
-                textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 16px rgba(212,175,55,0.45)",
-              }}
-            >
-              &ldquo;Không có gì quý hơn
-              <br />
-              &nbsp;Độc lập - Tự do!&rdquo;
-            </p>
-          </div>
-
-          {/* Lớp mờ chuyển tiếp êm ái chân About với Stats (desktop) */}
-          <div
-            className="absolute bottom-0 inset-x-0 h-9 pointer-events-none z-30"
-            style={{
-              background:
-                "linear-gradient(to right, rgba(251, 247, 238, 0.75) 0%, rgba(251, 247, 238, 0.6) 44%, rgba(212, 175, 55, 0.65) 47.5%, rgba(110, 13, 19, 0.75) 52%, rgba(133, 15, 23, 0.85) 100%)",
-              backdropFilter: "blur(4px)",
-              WebkitBackdropFilter: "blur(4px)",
-              maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
-            }}
-          />
-        </div>
-      </div>
-
-      {/* ============================================================== */}
-      {/* 2. GIAO DIỆN MOBILE & TABLET (< lg): BỐ CỤC ĐỨNG CÂN XỨNG & ĐẸP MẮT */}
-      {/* ============================================================== */}
-      <div className="block lg:hidden relative w-full pt-8 pb-10">
-        {/* Lớp bóng mờ tiếp giáp tự nhiên đỉnh section với Hero */}
-        <div
-          className="absolute top-0 inset-x-0 h-8 pointer-events-none z-20"
-          style={{
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)",
-          }}
-        />
-
-        {/* Phần 1: Nội dung chữ trọn vẹn trên nền giấy kem nguyên bản (#FBF7EE), 100% rõ nét */}
-        <div className="reveal-on-scroll reveal-slide-right px-5 sm:px-8 relative z-20">
-          {/* Eyebrow */}
-          <div className="flex items-center gap-2 mb-2">
-            <span className="w-5 h-[2px] bg-[#B5181C] rounded-full" />
-            <span className="text-[#B5181C] text-[11px] font-extrabold tracking-[0.24em] uppercase">
-              VỀ QUẢNG PHÚ
-            </span>
-            <span className="w-5 h-[2px] bg-[#B5181C] rounded-full" />
-          </div>
-
-          {/* Headline */}
-          <h2 className="font-serif text-[#22130F] font-bold tracking-tight leading-[1.15] text-[26px] xs:text-[28px] sm:text-[32px]">
-            <span className="block">Dấu ấn được tạo nên</span>
-            <span className="block mt-0.5">từ tay nghề.</span>
+          {/* Tiêu đề 2 dòng đậm nét chuẩn mẫu - Scale to đẹp mắt */}
+          <h2 className="font-sans font-bold text-white text-[38px] sm:text-[48px] md:text-[58px] lg:text-[66px] xl:text-[72px] leading-[1.04] tracking-tight">
+            Quảng Phú <br />
+            Make Difference
           </h2>
 
-          {/* Paragraph: 100% độ rộng màn hình, không bị đường cong cắt ngang, chữ đậm nét, dễ đọc */}
-          <p className="mt-3.5 text-[#2B1F19] text-[13.5px] sm:text-[14.5px] leading-[1.75] font-normal">
-            Hơn cả một đơn vị cơ khí, Quảng Phú là nơi hội tụ của kỹ thuật và mỹ thuật đỉnh cao. Từ các khối xe nghi trượng đại lễ quốc gia đến tượng chân dung truyền thần, chúng tôi luôn đặt sự chính xác, thần thái uy nghiêm và chất lượng trường tồn lên hàng đầu.
-          </p>
-
-          {/* Nút hành động */}
-          <div className="mt-5">
-            <button
-              onClick={onOpenConsultation}
-              className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full font-semibold text-[13px] text-white transition-all transform active:scale-98 cursor-pointer"
-              style={{
-                background: "linear-gradient(135deg, #B5181C 0%, #850E12 100%)",
-                boxShadow:
-                  "0 6px 20px rgba(181,24,28,0.45), inset 0 1px 0 rgba(255,255,255,0.25)",
-              }}
-            >
-              <span>Tìm hiểu thêm</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
+          {/* Đoạn văn tôn chỉ & định hướng */}
+          <div className="max-w-3xl mx-auto mt-3 sm:mt-3.5">
+            <p className="text-zinc-300 text-[14px] sm:text-[15.5px] lg:text-[16.5px] leading-relaxed font-normal text-pretty">
+              Quảng Phú hướng tới việc trở thành một trong những đơn vị hàng đầu trong lĩnh vực chế tác mô hình khối xe nghi trượng Đại lễ Quốc gia, tượng đài chiến thắng và tượng chân dung mỹ thuật đỉnh cao trong nước và quốc tế.
+            </p>
           </div>
         </div>
 
-        {/* Phần 2: Thẻ trưng bày tác phẩm nghệ thuật điện ảnh (Cờ đỏ sao vàng toàn phần, Tượng Bác Hồ, Khung ảnh & Danh ngôn) */}
-        <div className="reveal-on-scroll reveal-scale-up mt-7 px-4 sm:px-6 relative z-20">
-          <div
-            className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,0.28)]"
-            style={{
-              border: "1.5px solid rgba(212, 175, 55, 0.55)",
-            }}
-          >
-            {/* Bức họa mỹ thuật trọn vẹn 100% lụa đỏ, sao vàng, Bác Hồ, tranh nghệ nhân và trống đồng Đông Sơn */}
-            <img
-              src="/images/generated/about_section_mobile_art.jpg"
-              alt="Bác Hồ và tinh hoa cơ khí mỹ thuật Quảng Phú"
-              className="w-full h-full object-cover object-center"
-            />
+        {/* ============================================================== */}
+        {/* 2. DẢI CARD XÉO XÉO TỰ ĐỘNG LƯỚT ẢNH MỖI 4S - TO & RÕ NÉT      */}
+        {/* ============================================================== */}
+        <div
+          className="reveal-on-scroll reveal-float-up mt-6 sm:mt-7 lg:mt-8 relative w-full"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Khung chứa các card xéo xéo lướt ngang */}
+          <div className="overflow-hidden w-full py-4 sm:py-5 px-3">
+            <div
+              className="flex items-center gap-4 sm:gap-6 lg:gap-7 transition-transform duration-700 ease-in-out will-change-transform"
+              style={{
+                transform: `translateX(calc(-${currentIndex} * (clamp(190px, 22vw, 315px) + clamp(16px, 1.8vw, 28px))))`,
+              }}
+            >
+              {displayedImages.map((img, idx) => {
+                const originalIndex = idx % totalImages;
 
-            {/* Quầng sáng mờ tinh tế góc dưới bên trái giúp tôn chữ thư pháp vàng rực rỡ */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-y-0 left-0 w-3/5 bg-gradient-to-r from-black/45 to-transparent pointer-events-none" />
+                return (
+                  <div
+                    key={`${img.url}-${idx}`}
+                    onClick={() => handleOpenLightbox(originalIndex)}
+                    className={`relative shrink-0 w-[190px] sm:w-[230px] md:w-[265px] lg:w-[295px] xl:w-[315px] aspect-[16/10] overflow-hidden rounded-none border border-white/20 bg-zinc-900 shadow-2xl transition-all duration-500 ease-out transform ${img.tilt} hover:rotate-0 hover:scale-108 hover:z-30 hover:border-[#C1121F] hover:shadow-[0_14px_40px_rgba(193,18,31,0.55)] cursor-pointer group select-none`}
+                  >
+                    {/* Ảnh thực tế của xưởng */}
+                    <img
+                      src={img.url}
+                      alt={img.title}
+                      className="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500"
+                    />
 
-            {/* Viền ánh kim bên trong */}
-            <div className="absolute inset-0 rounded-2xl border border-white/15 pointer-events-none" />
-
-            {/* Danh ngôn thư pháp Bác Hồ mạ vàng hoàng gia ở góc trái thẻ, cân đối hoàn hảo với tượng Bác bên phải */}
-            <div className="absolute bottom-3 xs:bottom-3.5 left-3.5 xs:left-4 sm:left-6 z-10 text-left pointer-events-none">
-              <p
-                className="text-[#FFE8A3] text-[15px] xs:text-[16.5px] sm:text-[18.5px] leading-snug tracking-wide select-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
-                style={{
-                  fontFamily: 'var(--font-script), "Dancing Script", cursive',
-                  fontWeight: 700,
-                  textShadow: "0 2px 8px rgba(0,0,0,1), 0 0 14px rgba(229,184,66,0.6)",
-                }}
-              >
-                &ldquo;Không có gì quý hơn
-                <br />
-                Độc lập - Tự do!&rdquo;
-              </p>
+                    {/* Gradient và chú thích khi hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-2.5 sm:p-3 text-left">
+                      <div className="self-end w-6 h-6 rounded-full bg-black/60 flex items-center justify-center text-white">
+                        <Maximize2 className="w-3.5 h-3.5" />
+                      </div>
+                      <p className="text-[11.5px] sm:text-[13px] text-white font-medium leading-snug line-clamp-2">
+                        {img.title}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
-
-        {/* Lớp bóng mờ tiếp giáp tự nhiên đáy section với Stats */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-6 pointer-events-none z-20"
-          style={{
-            background: "linear-gradient(to top, rgba(110,13,19,0.3) 0%, transparent 100%)",
-          }}
-        />
       </div>
+
+      {/* Lightbox Modal để xem ảnh thực tế phóng to */}
+      <ProjectLightboxModal
+        items={lightboxData.isOpen ? lightboxData.items : []}
+        currentIndex={lightboxData.currentIndex}
+        onNavigate={(newIdx) =>
+          setLightboxData((prev) => ({ ...prev, currentIndex: newIdx }))
+        }
+        onClose={() => setLightboxData((prev) => ({ ...prev, isOpen: false }))}
+      />
     </section>
   );
 }

@@ -7,7 +7,7 @@ export default function ClientsSection() {
       tag: "Cơ quan Nhà nước",
       title: "Cơ quan Nhà nước",
       subtitle: "Trụ sở & cơ quan công quyền",
-      image: "/images/generated/client_card_1_state.jpg",
+      image: "/images/1790914174307_3763498134712611457_3763498134712611457_ac5b4699dd9463fc0898c16d464020e3.jpg",
       icon: (
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
           <path
@@ -36,7 +36,7 @@ export default function ClientsSection() {
       tag: "Di tích lịch sử",
       title: "Ban quản lý di tích",
       subtitle: "Đền chùa, nhà thờ họ",
-      image: "/images/generated/client_card_2_heritage.jpg",
+      image: "/images/1790914174385_3763498134712611457_3763498134712611457_659d4f59ffc7c4f64e05689299e707d4.jpg",
       icon: (
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
           <path
@@ -57,7 +57,7 @@ export default function ClientsSection() {
       tag: "Gia đình - Dòng họ",
       title: "Gia đình, dòng họ",
       subtitle: "Tượng chân dung thờ gia tiên",
-      image: "/images/generated/client_card_3_ancestor.jpg",
+      image: "/images/1790914174295_3763498134712611457_3763498134712611457_65c9531735dc897b8ae5cb25e453adec.jpg",
       icon: (
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
           <circle cx="20" cy="13" r="5" fill="url(#goldIconGrad)" />
@@ -75,7 +75,7 @@ export default function ClientsSection() {
       tag: "Doanh nghiệp",
       title: "Doanh nghiệp, tập đoàn",
       subtitle: "Quà tặng mỹ thuật cao cấp",
-      image: "/images/generated/client_card_4_corporate.jpg",
+      image: "/images/1790914174362_3763498134712611457_3763498134712611457_496323da53e09bf68a8fe6497aef4e68.jpg",
       icon: (
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
           <rect x="8" y="18" width="6" height="16" fill="url(#goldIconGrad)" rx="1" />
@@ -92,6 +92,15 @@ export default function ClientsSection() {
       id="khach-hang"
       className="relative w-full text-white overflow-hidden select-none -mt-[1px] bg-[#111217]"
     >
+      {/* Lớp mờ chuyển tiếp mỏng ở đỉnh: hòa nền đỏ sẫm section trên vào nền than */}
+      <div
+        className="absolute top-0 inset-x-0 h-8 sm:h-10 pointer-events-none z-30"
+        style={{
+          background:
+            "linear-gradient(to bottom, #58080C 0%, rgba(88,8,12,0.45) 45%, transparent 100%)",
+        }}
+      />
+
       {/* Gradients dùng chung cho Icons vàng kim */}
       <svg className="absolute w-0 h-0" aria-hidden="true">
         <defs>
@@ -111,7 +120,7 @@ export default function ClientsSection() {
       {/* ============================================================== */}
       <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[62%] pointer-events-none overflow-hidden z-10">
         <img
-          src="/images/generated/clients_parade_clean.jpg"
+          src="/images/1790914284678_3763498134712611457_3763498134712611457_ba3694066fc6577396aa5602364d4310.jpg"
           alt="Đại lễ Quốc gia Khối xe nghi trượng"
           className="w-full h-full object-cover object-[center_top] filter saturate-105 brightness-95 opacity-90"
         />
@@ -130,7 +139,7 @@ export default function ClientsSection() {
           {/* Cánh tả: Tag & Tiêu đề lớn 2 dòng sang trọng */}
           <div className="reveal-on-scroll reveal-slide-right flex flex-col items-start max-w-xl">
             {/* Tag nhãn vàng ánh kim */}
-            <span className="text-[#D4AF37] text-[11px] sm:text-xs font-extrabold tracking-[0.24em] uppercase mb-1.5 sm:mb-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+            <span className="text-[#C1121F] text-[11px] sm:text-xs font-extrabold tracking-[0.24em] uppercase mb-1.5 sm:mb-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
               KHÁCH HÀNG CỦA CHÚNG TÔI
             </span>
 
@@ -141,15 +150,18 @@ export default function ClientsSection() {
             </h2>
           </div>
 
-          {/* Cánh hữu: Khẩu hiệu & Chữ ký vàng nghệ thuật nằm trực tiếp trên nền cực kỳ nổi bật, thanh thoát */}
+          {/* Cánh hữu: Khẩu hiệu & Chữ ký nghệ thuật Quảng Phú nổi bật trên nền */}
           <div className="reveal-on-scroll reveal-slide-left relative flex flex-col items-start lg:items-end text-left lg:text-right pt-1 lg:pt-1.5">
             {/* Quầng tối khuếch tán tự nhiên phía sau giúp chữ luôn nổi bật 100% không cần khung viền */}
             <div
-              className="absolute -inset-x-10 -inset-y-8 pointer-events-none -z-10 rounded-full blur-2xl opacity-75"
+              className="absolute -inset-x-12 -inset-y-10 pointer-events-none -z-10 rounded-full blur-2xl opacity-90"
               style={{
-                background: "radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 55%, transparent 80%)",
+                background: "radial-gradient(ellipse at center, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 85%)",
               }}
             />
+
+            {/* Vệt hào quang đỏ mờ tinh tế hỗ trợ độ tương phản quang học */}
+            <div className="absolute right-0 bottom-0 w-64 h-24 bg-[#C1121F]/20 rounded-full blur-3xl pointer-events-none -z-10" />
 
             <span
               className="font-sans font-bold text-white text-[12px] sm:text-[13px] lg:text-[14px] tracking-[0.22em] uppercase"
@@ -168,11 +180,18 @@ export default function ClientsSection() {
               KIẾN TẠO TƯƠNG LAI
             </span>
 
-            {/* Chữ ký thư pháp mạ vàng 24K Quảng Phú nổi bật rực rỡ */}
+            {/* Chữ kiểu tên thương hiệu màu đỏ nổi bật sắc nét trên nền (Không cần badge) */}
             <div
-              className="mt-2 font-serif italic font-bold text-3xl sm:text-4xl lg:text-[46px] tracking-wide select-none bg-gradient-to-r from-[#FFF6D4] via-[#F5D061] to-[#D4AF37] bg-clip-text text-transparent"
+              className="mt-2 font-serif italic font-extrabold text-[36px] sm:text-[44px] lg:text-[50px] tracking-wide select-none text-[#FF2E3B] transition-transform duration-300 hover:scale-105"
               style={{
-                filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.98)) drop-shadow(0 2px 6px rgba(0,0,0,1))",
+                textShadow: `
+                  0 0 2px #000000,
+                  0 1px 3px rgba(0, 0, 0, 1),
+                  0 3px 8px rgba(0, 0, 0, 0.98),
+                  0 6px 18px rgba(0, 0, 0, 0.95),
+                  0 0 28px rgba(225, 20, 35, 0.5)
+                `,
+                letterSpacing: "0.02em",
               }}
             >
               Quảng Phú
@@ -187,7 +206,7 @@ export default function ClientsSection() {
           {clients.map((item, idx) => (
             <div
               key={idx}
-              className={`reveal-on-scroll reveal-card-shimmer reveal-delay-${idx + 1} group relative rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-2 border border-white/15 hover:border-[#D4AF37]/80 shadow-[0_12px_32px_rgba(0,0,0,0.65)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_24px_rgba(212,175,55,0.3)] flex flex-col justify-between h-[260px] sm:h-[300px] lg:h-[320px]`}
+              className={`reveal-on-scroll reveal-card-shimmer reveal-delay-${idx + 1} group relative rounded-none overflow-hidden cursor-pointer hover:-translate-y-2 border border-white/15 hover:border-[#C1121F]/80 shadow-[0_12px_32px_rgba(0,0,0,0.65)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_24px_rgba(193,18,31,0.35)] flex flex-col justify-end h-[260px] sm:h-[300px] lg:h-[320px]`}
             >
               {/* Ảnh nền trực quan độ nét cao */}
               <img
@@ -199,25 +218,13 @@ export default function ClientsSection() {
               {/* Lớp phủ gradient tối dần từ giữa xuống đáy để chữ luôn nổi bật 100% */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25 group-hover:from-black/98 group-hover:via-black/60 transition-colors duration-300" />
 
-              {/* Hàng trên cùng của thẻ: Badge phân nhóm và icon vàng */}
-              <div className="relative z-10 p-4 sm:p-5 flex items-center justify-between">
-                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#D4AF37]/40 text-[#FDE8B5] text-[11px] font-semibold tracking-wider">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-                  <span>{item.num}</span>
-                </div>
-
-                <div className="w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center text-[#E5C158] group-hover:scale-110 group-hover:border-[#D4AF37] group-hover:shadow-[0_0_12px_rgba(212,175,55,0.5)] transition-all">
-                  {item.icon}
-                </div>
-              </div>
-
               {/* Nội dung thông tin phía dưới thẻ */}
               <div className="relative z-10 p-4 sm:p-5 flex flex-col justify-end text-left">
                 {/* Chỉ vàng kim trang trí */}
-                <div className="w-8 h-0.5 bg-[#D4AF37] mb-2 rounded-full group-hover:w-16 transition-all duration-300 shadow-[0_0_6px_rgba(212,175,55,0.8)]" />
+                <div className="w-8 h-0.5 bg-[#C1121F] mb-2 rounded-full group-hover:w-16 transition-all duration-300 shadow-[0_0_6px_rgba(193,18,31,0.8)]" />
 
                 {/* Tên nhóm khách hàng */}
-                <h3 className="font-sans font-bold text-white text-[16px] sm:text-[17px] leading-snug group-hover:text-[#FDE8B5] transition-colors drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+                <h3 className="font-sans font-bold text-white text-[16px] sm:text-[17px] leading-snug group-hover:text-red-400 transition-colors drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
                   {item.title}
                 </h3>
 

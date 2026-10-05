@@ -4,21 +4,34 @@
 export const SITE_INFO = {
   name: "Cơ Khí Mỹ Thuật Quảng Phú",
   shortName: "Quảng Phú",
+  legalName: "CÔNG TY TNHH CƠ KHÍ MỸ THUẬT QUẢNG PHÚ",
   slogan: "Cơ khí mỹ thuật • Đúc đồng • Tượng danh nhân • Xe nghi trượng",
   phone: "0961 031 318",
   phoneHref: "tel:0961031318",
   zalo: "https://zalo.me/0961031318",
   address: "Thôn Quảng Bố, Xã Quảng Phú, Huyện Lương Tài, Tỉnh Bắc Ninh, Việt Nam",
   mapUrl: "https://maps.app.goo.gl/3jSzaGFSzLRdym8LA",
+  mapEmbedUrl:
+    "https://www.google.com/maps?q=Th%C3%B4n+Qu%E1%BA%A3ng+B%E1%BB%91,+X%C3%A3+Qu%E1%BA%A3ng+Ph%C3%BA,+Huy%E1%BB%87n+L%C6%B0%C6%A1ng+T%C3%A0i,+T%E1%BB%89nh+B%E1%BA%AFc+Ninh&output=embed",
   workingHours: "T2 – CN: 7h30 – 18h00 (Hỗ trợ 24/7)",
+  taxId: "2300233337",
+  taxAddress: "Thôn Quảng Bố, Xã Lâm Thao, TP Bắc Ninh, Việt Nam",
+  representative: "ĐỖ HUY KHANH",
+  landline: "0222 386 7318",
+  landlineHref: "tel:02223867318",
+  establishedDate: "12/12/2002",
+  status: "Đang hoạt động",
+  taxAuthority: "Thuế cơ sở 10 thành phố Bắc Ninh",
+  businessType: "Công ty TNHH 2 thành viên trở lên ngoài NN",
 };
 
 export const NAV_LINKS = [
-  { label: "Trang chủ", href: "#hero" },
-  { label: "Giới thiệu", href: "#ve-quang-phu" },
-  { label: "Dự án", href: "#du-an-noi-bat" },
-  { label: "Dịch vụ", href: "#dich-vu" },
-  { label: "Liên hệ", href: "#lien-he" },
+  { label: "Trang chủ", href: "/#hero" },
+  { label: "Về chúng tôi", href: "/ve-chung-toi" },
+  { label: "Dự án", href: "/#du-an-noi-bat" },
+  { label: "Dịch vụ", href: "/#dich-vu" },
+  { label: "Tin tức", href: "/#tin-tuc" },
+  { label: "Liên hệ", href: "/#lien-he" },
 ];
 
 export const STATS = [

@@ -34,7 +34,7 @@ export default function VideoModal({ isOpen, onClose }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl bg-[#141519] border border-white/20 rounded-3xl overflow-hidden shadow-2xl cursor-default"
+        className="relative w-full max-w-4xl bg-[#141519] border border-white/20 rounded-none overflow-hidden shadow-2xl cursor-default"
       >
         {/* Close Button */}
         <button
