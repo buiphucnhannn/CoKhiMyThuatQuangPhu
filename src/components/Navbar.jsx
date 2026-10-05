@@ -515,7 +515,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0C0D10]/98 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-20 px-6 pb-8 animate-fadeIn">
+        <div className="fixed inset-0 z-40 bg-[#0C0D10]/98 backdrop-blur-2xl lg:hidden flex flex-col justify-between pt-20 px-6 pb-8 animate-fadeIn overflow-y-auto">
           <div className="flex flex-col">
             <div className="text-[10px] uppercase tracking-[0.25em] text-[#C1121F] font-bold mb-4 pb-2 border-b border-white/10 font-mono">
               ĐIỀU HƯỚNG

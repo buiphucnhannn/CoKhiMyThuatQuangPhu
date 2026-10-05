@@ -80,19 +80,19 @@ export default function DuAnPage() {
             <span className="text-[#C1121F] text-[11px] sm:text-xs font-mono uppercase tracking-[0.28em] block mb-3">
               CÔNG TRÌNH & ĐẠI LỄ TIÊU BIỂU
             </span>
-            <h1 className="text-white font-sans font-bold text-[36px] sm:text-[50px] lg:text-[60px] leading-[1.08] tracking-tight">
+            <h1 className="text-white font-sans font-bold text-[28px] sm:text-[50px] lg:text-[60px] leading-[1.08] tracking-tight">
               Dự án Tiêu biểu
             </h1>
 
             {/* Bộ lọc căn giữa ngang + giữa dọc trong dải */}
-            <div className="mt-8 border-y border-white/10 py-4 flex items-center justify-center flex-wrap gap-y-3">
+            <div className="mt-8 border-y border-white/10 py-3 sm:py-4 flex items-center justify-center flex-wrap gap-y-2 sm:gap-y-3">
               {categories.map((cat, idx) => {
                 const isActive = selectedCategory === cat.id;
                 return (
                   <div key={cat.id} className="flex items-center">
                     <button
                       onClick={() => handleCategoryChange(cat.id)}
-                      className={`relative px-3 sm:px-4 py-1.5 text-xs sm:text-[14px] transition-all cursor-pointer select-none font-medium ${
+                      className={`relative px-2.5 sm:px-4 py-1.5 text-xs sm:text-[14px] transition-all cursor-pointer select-none font-medium ${
                         isActive
                           ? "text-white font-semibold"
                           : "text-zinc-400 hover:text-white"
@@ -184,7 +184,7 @@ export default function DuAnPage() {
                         </Link>
                       </h2>
 
-                      <p className="mt-3 sm:mt-4 text-zinc-300 text-[13.5px] sm:text-[14.5px] leading-[1.8] font-normal text-pretty">
+                      <p className="mt-3 sm:mt-4 text-zinc-300 text-[13.5px] sm:text-[14.5px] leading-[1.8] font-normal text-justify sm:text-left">
                         {project.excerpt}
                       </p>
 
@@ -210,7 +210,7 @@ export default function DuAnPage() {
           {/* PHÂN TRANG (PAGINATION) PHÍA DƯỚI                              */}
           {/* ============================================================== */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between flex-wrap gap-4 pt-10 sm:pt-14 pb-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-10 sm:pt-14 pb-4 text-center sm:text-left">
               {/* Thống kê số lượng */}
               <p className="text-xs sm:text-[13px] text-zinc-400 font-mono">
                 Hiển thị trang <span className="text-white font-semibold">{currentPage}</span> / {totalPages} (Tổng {filteredProjects.length} dự án)

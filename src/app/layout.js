@@ -39,6 +39,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="vi"
+      data-scroll-behavior="smooth"
       className={`${cormorantUpright.variable} ${playfair.variable} ${beVietnam.variable} ${dancingScript.variable} scroll-smooth antialiased`}
     >
       <body className="min-h-screen bg-[#0D0E11] text-[#E0E2EC] font-sans selection:bg-red-600 selection:text-white">

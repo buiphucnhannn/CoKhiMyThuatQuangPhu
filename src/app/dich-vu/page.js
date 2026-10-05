@@ -23,10 +23,10 @@ export default function DichVuPage() {
             <span className="text-[#C1121F] text-[11px] sm:text-xs font-mono uppercase tracking-[0.28em] block mb-3">
               DANH MỤC LĨNH VỰC HOẠT ĐỘNG
             </span>
-            <h1 className="text-white font-sans font-bold text-[36px] sm:text-[48px] lg:text-[56px] leading-[1.1] tracking-tight">
+            <h1 className="text-white font-sans font-bold text-[28px] sm:text-[48px] lg:text-[56px] leading-[1.1] tracking-tight">
               Dịch vụ của chúng tôi
             </h1>
-            <p className="mt-4 text-zinc-400 text-[14.5px] sm:text-[16px] leading-relaxed font-normal">
+            <p className="mt-4 text-zinc-400 text-[14px] sm:text-[16px] leading-relaxed font-normal text-justify sm:text-center px-1 sm:px-0">
               Kết hợp tinh hoa thủ công truyền đời và kỹ thuật số hiện đại, kiến tạo nên các công trình mang giá trị biểu tượng quốc gia.
             </p>
           </div>

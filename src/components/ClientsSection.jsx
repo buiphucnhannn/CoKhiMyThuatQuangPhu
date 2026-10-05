@@ -144,7 +144,7 @@ export default function ClientsSection() {
             </span>
 
             {/* Tiêu đề chính 2 dòng thanh lịch */}
-            <h2 className="font-serif text-white font-bold tracking-tight leading-[1.12] text-[28px] sm:text-[34px] lg:text-[40px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            <h2 className="font-serif text-white font-bold tracking-tight leading-[1.12] text-[24px] sm:text-[34px] lg:text-[40px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
               <span className="block">Đồng hành cùng</span>
               <span className="block mt-0.5 sm:mt-1">những giá trị bền vững.</span>
             </h2>
@@ -154,7 +154,7 @@ export default function ClientsSection() {
           <div className="reveal-on-scroll reveal-slide-left relative flex flex-col items-start lg:items-end text-left lg:text-right pt-1 lg:pt-1.5">
             {/* Quầng tối khuếch tán tự nhiên phía sau giúp chữ luôn nổi bật 100% không cần khung viền */}
             <div
-              className="absolute -inset-x-12 -inset-y-10 pointer-events-none -z-10 rounded-full blur-2xl opacity-90"
+              className="absolute -inset-x-6 sm:-inset-x-12 -inset-y-10 pointer-events-none -z-10 rounded-full blur-2xl opacity-90"
               style={{
                 background: "radial-gradient(ellipse at center, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 85%)",
               }}
@@ -182,7 +182,7 @@ export default function ClientsSection() {
 
             {/* Chữ kiểu tên thương hiệu màu đỏ nổi bật sắc nét trên nền (Không cần badge) */}
             <div
-              className="mt-2 font-serif italic font-extrabold text-[36px] sm:text-[44px] lg:text-[50px] tracking-wide select-none text-[#FF2E3B] transition-transform duration-300 hover:scale-105"
+              className="mt-2 font-serif italic font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] tracking-wide select-none text-[#FF2E3B] transition-transform duration-300 hover:scale-105"
               style={{
                 textShadow: `
                   0 0 2px #000000,
@@ -202,11 +202,11 @@ export default function ClientsSection() {
         {/* ============================================================== */}
         {/* LƯỚI 4 CARD CÓ HÌNH ẢNH MINH HỌA SẮC NÉT & BỐ CỤC CHUYÊN NGHIỆP */}
         {/* ============================================================== */}
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
           {clients.map((item, idx) => (
             <div
               key={idx}
-              className={`reveal-on-scroll reveal-card-shimmer reveal-delay-${idx + 1} group relative rounded-none overflow-hidden cursor-pointer hover:-translate-y-2 border border-white/15 hover:border-[#C1121F]/80 shadow-[0_12px_32px_rgba(0,0,0,0.65)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_24px_rgba(193,18,31,0.35)] flex flex-col justify-end h-[260px] sm:h-[300px] lg:h-[320px]`}
+              className={`reveal-on-scroll reveal-card-shimmer reveal-delay-${idx + 1} group relative rounded-none overflow-hidden cursor-pointer hover:-translate-y-2 border border-white/15 hover:border-[#C1121F]/80 shadow-[0_12px_32px_rgba(0,0,0,0.65)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_24px_rgba(193,18,31,0.35)] flex flex-col justify-end h-[220px] sm:h-[300px] lg:h-[320px]`}
             >
               {/* Ảnh nền trực quan độ nét cao */}
               <img

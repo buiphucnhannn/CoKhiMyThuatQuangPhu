@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Maximize2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
 import ProjectLightboxModal from "@/components/ProjectLightboxModal";
 
 // 14 ẢNH THỰC TẾ DO NGƯỜI DÙNG CHUẨN BỊ SẴN TRONG THƯ MỤC PUBLIC/IMAGES
@@ -88,6 +88,9 @@ export default function AboutSection() {
     currentIndex: 0,
   });
 
+  const touchStartXRef = useRef(0);
+  const touchStartYRef = useRef(0);
+
   const totalImages = USER_PREPARED_IMAGES.length;
 
   // Tự động lướt ảnh qua mỗi 4s đúng theo yêu cầu của người dùng
@@ -100,6 +103,27 @@ export default function AboutSection() {
 
     return () => clearInterval(timer);
   }, [isHovered, totalImages]);
+
+  // Hỗ trợ thao tác vuốt cảm ứng mượt mà trên mobile
+  const handleTouchStart = (e) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 35) {
+      if (deltaX < 0) {
+        // Vuốt sang trái -> Xem ảnh tiếp theo
+        setCurrentIndex((prev) => (prev + 1) % totalImages);
+      } else {
+        // Vuốt sang phải -> Xem ảnh trước
+        setCurrentIndex((prev) => (prev - 1 + totalImages) % totalImages);
+      }
+    }
+  };
 
   const handleOpenLightbox = (index) => {
     const formatted = USER_PREPARED_IMAGES.map((img) => ({
@@ -121,7 +145,7 @@ export default function AboutSection() {
   return (
     <section
       id="ve-quang-phu"
-      className="relative w-full bg-[#0A0B0E] text-white min-h-[100dvh] flex flex-col justify-center overflow-hidden select-none z-10 pt-16 sm:pt-20 pb-20 sm:pb-28 lg:pb-32"
+      className="relative w-full bg-[#0A0B0E] text-white min-h-0 lg:h-[clamp(650px,100dvh,920px)] xl:h-[clamp(680px,100dvh,960px)] flex flex-col justify-center overflow-hidden select-none z-10 py-14 sm:py-20 lg:py-0"
     >
       {/* Quầng sáng đỏ mờ tinh tế phía sau */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-[#C1121F]/15 rounded-full blur-[140px] pointer-events-none" />
@@ -142,14 +166,14 @@ export default function AboutSection() {
           </div>
 
           {/* Tiêu đề 2 dòng đậm nét chuẩn mẫu - Scale to đẹp mắt */}
-          <h2 className="font-sans font-bold text-white text-[38px] sm:text-[48px] md:text-[58px] lg:text-[66px] xl:text-[72px] leading-[1.04] tracking-tight">
+          <h2 className="font-sans font-bold text-white text-[32px] sm:text-[48px] md:text-[58px] lg:text-[66px] xl:text-[72px] leading-[1.04] tracking-tight">
             Quảng Phú <br />
             Make Difference
           </h2>
 
           {/* Đoạn văn tôn chỉ & định hướng */}
-          <div className="max-w-3xl mx-auto mt-3 sm:mt-3.5">
-            <p className="text-zinc-300 text-[14px] sm:text-[15.5px] lg:text-[16.5px] leading-relaxed font-normal text-pretty">
+          <div className="max-w-2xl mx-auto mt-3.5 sm:mt-4">
+            <p className="text-zinc-300 text-[14px] sm:text-[15.5px] lg:text-[16.5px] leading-relaxed font-normal text-center px-3 sm:px-0">
               Quảng Phú hướng tới việc trở thành một trong những đơn vị hàng đầu trong lĩnh vực chế tác mô hình khối xe nghi trượng Đại lễ Quốc gia, tượng đài chiến thắng và tượng chân dung mỹ thuật đỉnh cao trong nước và quốc tế.
             </p>
           </div>
@@ -162,13 +186,15 @@ export default function AboutSection() {
           className="reveal-on-scroll reveal-float-up mt-6 sm:mt-7 lg:mt-8 relative w-full"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           {/* Khung chứa các card xéo xéo lướt ngang */}
-          <div className="overflow-hidden w-full py-4 sm:py-5 px-3">
+          <div className="overflow-hidden w-full py-4 sm:py-5 px-3 sm:px-4">
             <div
-              className="flex items-center gap-4 sm:gap-6 lg:gap-7 transition-transform duration-700 ease-in-out will-change-transform"
+              className="about-carousel-track flex items-center gap-3 sm:gap-4 lg:gap-7 transition-transform duration-700 ease-in-out will-change-transform"
               style={{
-                transform: `translateX(calc(-${currentIndex} * (clamp(190px, 22vw, 315px) + clamp(16px, 1.8vw, 28px))))`,
+                "--about-idx": currentIndex,
               }}
             >
               {displayedImages.map((img, idx) => {
@@ -178,7 +204,7 @@ export default function AboutSection() {
                   <div
                     key={`${img.url}-${idx}`}
                     onClick={() => handleOpenLightbox(originalIndex)}
-                    className={`relative shrink-0 w-[190px] sm:w-[230px] md:w-[265px] lg:w-[295px] xl:w-[315px] aspect-[16/10] overflow-hidden rounded-none border border-white/20 bg-zinc-900 shadow-2xl transition-all duration-500 ease-out transform ${img.tilt} hover:rotate-0 hover:scale-108 hover:z-30 hover:border-[#C1121F] hover:shadow-[0_14px_40px_rgba(193,18,31,0.55)] cursor-pointer group select-none`}
+                    className={`relative shrink-0 w-[calc(50%-6px)] sm:w-[calc(50%-8px)] lg:w-[295px] xl:w-[315px] aspect-[16/10] overflow-hidden rounded-none border border-white/20 bg-zinc-900 shadow-2xl transition-all duration-500 ease-out transform ${img.tilt} hover:rotate-0 hover:scale-108 hover:z-30 hover:border-[#C1121F] hover:shadow-[0_14px_40px_rgba(193,18,31,0.55)] cursor-pointer group select-none`}
                   >
                     {/* Ảnh thực tế của xưởng */}
                     <img
@@ -200,6 +226,43 @@ export default function AboutSection() {
                 );
               })}
             </div>
+          </div>
+
+          {/* Chỉ báo phân trang & nút điều hướng lướt trên Mobile */}
+          <div className="flex items-center justify-center gap-3 mt-3 sm:mt-4 lg:hidden">
+            <button
+              type="button"
+              onClick={() => setCurrentIndex((prev) => (prev - 1 + totalImages) % totalImages)}
+              aria-label="Ảnh trước"
+              className="w-7 h-7 rounded-full bg-white/10 hover:bg-[#C1121F] active:scale-95 flex items-center justify-center text-white/80 transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-1.5">
+              {USER_PREPARED_IMAGES.slice(0, 6).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setCurrentIndex(i)}
+                  aria-label={`Ảnh ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    currentIndex % 6 === i
+                      ? "w-6 bg-[#C1121F]"
+                      : "w-1.5 bg-white/20 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setCurrentIndex((prev) => (prev + 1) % totalImages)}
+              aria-label="Ảnh kế tiếp"
+              className="w-7 h-7 rounded-full bg-white/10 hover:bg-[#C1121F] active:scale-95 flex items-center justify-center text-white/80 transition-colors"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>

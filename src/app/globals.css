@@ -304,3 +304,18 @@ body {
 .reveal-delay-4 { transition-delay: 0.50s !important; }
 .reveal-delay-5 { transition-delay: 0.64s !important; }
 
+/* About Section Carousel Track Responsive Translation (Hiển thị trọn vẹn 2 ảnh trên mobile, không bị đứt góc) */
+.about-carousel-track {
+  transform: translateX(calc(var(--about-idx, 0) * -1 * (50% + 6px)));
+}
+@media (min-width: 640px) {
+  .about-carousel-track {
+    transform: translateX(calc(var(--about-idx, 0) * -1 * (50% + 8px)));
+  }
+}
+@media (min-width: 1024px) {
+  .about-carousel-track {
+    transform: translateX(calc(var(--about-idx, 0) * -1 * (clamp(295px, 22vw, 315px) + 28px)));
+  }
+}
+

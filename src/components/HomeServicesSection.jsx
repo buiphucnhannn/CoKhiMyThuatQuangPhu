@@ -15,14 +15,14 @@ export default function HomeServicesSection() {
     >
       <div className="max-w-[1360px] mx-auto px-5 sm:px-8 lg:px-12">
         {/* Tiêu đề & Nút Xem tất cả dịch vụ ngang hàng, nằm bên phải */}
-        <div className="reveal-on-scroll reveal-slide-right flex items-end justify-between flex-wrap gap-4 mb-12 sm:mb-16 lg:mb-20 pb-4">
-          <h2 className="text-[34px] sm:text-[46px] lg:text-[54px] font-bold text-zinc-900 tracking-tight font-sans leading-tight">
+        <div className="reveal-on-scroll reveal-slide-right flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-16 lg:mb-20 pb-4">
+          <h2 className="text-[28px] sm:text-[46px] lg:text-[54px] font-bold text-zinc-900 tracking-tight font-sans leading-tight">
             Dịch vụ của chúng tôi
           </h2>
 
           <Link
             href="/dich-vu"
-            className="inline-flex items-center gap-2.5 text-sm sm:text-base font-semibold text-zinc-900 hover:text-[#C1121F] transition-colors group cursor-pointer pb-2"
+            className="inline-flex items-center gap-2.5 text-sm sm:text-base font-semibold text-zinc-900 hover:text-[#C1121F] transition-colors group cursor-pointer pb-1 sm:pb-2"
           >
             <span className="tracking-wide">Xem tất cả dịch vụ</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1.5 text-[#C1121F]" />
@@ -37,7 +37,7 @@ export default function HomeServicesSection() {
             {leftServices[0] && (
               <Link
                 href={`/dich-vu/${leftServices[0].slug}`}
-                className="reveal-on-scroll reveal-3d-tilt reveal-delay-1 group block mb-14 sm:mb-18 lg:mb-20 cursor-pointer"
+                className="reveal-on-scroll reveal-3d-tilt reveal-delay-1 group block mb-10 sm:mb-18 lg:mb-20 cursor-pointer"
               >
                 <div className="relative aspect-[16/11] overflow-hidden bg-zinc-100 mb-4 sm:mb-5 rounded-none shadow-sm">
                   <img
@@ -50,7 +50,7 @@ export default function HomeServicesSection() {
                 <h3 className="font-sans font-bold text-zinc-900 text-[16px] sm:text-[18px] lg:text-[19px] uppercase tracking-wide group-hover:text-[#C1121F] transition-colors duration-300 mb-2 leading-snug">
                   {leftServices[0].title}
                 </h3>
-                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal">
+                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal text-justify sm:text-left">
                   {leftServices[0].summary}
                 </p>
               </Link>
@@ -73,7 +73,7 @@ export default function HomeServicesSection() {
                 <h3 className="font-sans font-bold text-zinc-900 text-[16px] sm:text-[18px] lg:text-[19px] uppercase tracking-wide group-hover:text-[#C1121F] transition-colors duration-300 mb-2 leading-snug">
                   {leftServices[1].title}
                 </h3>
-                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal">
+                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal text-justify sm:text-left">
                   {leftServices[1].summary}
                 </p>
               </Link>
@@ -86,7 +86,7 @@ export default function HomeServicesSection() {
             {rightServices[0] && (
               <Link
                 href={`/dich-vu/${rightServices[0].slug}`}
-                className="reveal-on-scroll reveal-3d-tilt reveal-delay-3 group block mb-14 sm:mb-18 lg:mb-20 cursor-pointer"
+                className="reveal-on-scroll reveal-3d-tilt reveal-delay-3 group block mb-10 sm:mb-18 lg:mb-20 cursor-pointer"
               >
                 <div className="relative aspect-[16/11] overflow-hidden bg-zinc-100 mb-4 sm:mb-5 rounded-none shadow-sm">
                   <img
@@ -99,7 +99,7 @@ export default function HomeServicesSection() {
                 <h3 className="font-sans font-bold text-zinc-900 text-[16px] sm:text-[18px] lg:text-[19px] uppercase tracking-wide group-hover:text-[#C1121F] transition-colors duration-300 mb-2 leading-snug">
                   {rightServices[0].title}
                 </h3>
-                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal">
+                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal text-justify sm:text-left">
                   {rightServices[0].summary}
                 </p>
               </Link>
@@ -122,7 +122,7 @@ export default function HomeServicesSection() {
                 <h3 className="font-sans font-bold text-zinc-900 text-[16px] sm:text-[18px] lg:text-[19px] uppercase tracking-wide group-hover:text-[#C1121F] transition-colors duration-300 mb-2 leading-snug">
                   {rightServices[1].title}
                 </h3>
-                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal">
+                <p className="text-zinc-600 text-xs sm:text-[13.5px] leading-relaxed line-clamp-3 font-normal text-justify sm:text-left">
                   {rightServices[1].summary}
                 </p>
               </Link>

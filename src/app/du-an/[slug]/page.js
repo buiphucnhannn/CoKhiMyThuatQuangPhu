@@ -99,7 +99,7 @@ export default function ProjectDetailPage({ params }) {
               {/* Tiêu đề lớn & Các đoạn văn nội dung bài viết */}
               <div className="lg:col-span-10 flex flex-col text-left">
                 {/* Tiêu đề in hoa đậm nét, sắc sảo */}
-                <h1 className="font-sans font-bold text-white text-[28px] sm:text-[38px] lg:text-[46px] leading-[1.12] tracking-tight uppercase">
+                <h1 className="font-sans font-bold text-white text-[22px] sm:text-[36px] lg:text-[46px] leading-[1.14] tracking-tight uppercase">
                   {project.title}
                 </h1>
 

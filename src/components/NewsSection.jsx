@@ -28,7 +28,7 @@ export default function NewsSection() {
               TIN TỨC & BẢN TIN NGHỀ
             </span>
             <div className="flex items-baseline justify-between flex-wrap gap-4">
-              <h1 className="text-white font-sans font-bold text-[36px] sm:text-[50px] lg:text-[60px] leading-[1.08] tracking-tight">
+              <h1 className="text-white font-sans font-bold text-[28px] sm:text-[50px] lg:text-[60px] leading-[1.08] tracking-tight">
                 Tin tức & Sự kiện
               </h1>
             </div>
@@ -75,7 +75,7 @@ export default function NewsSection() {
                       {item.title}
                     </h2>
 
-                    <p className="mt-3 sm:mt-4 text-zinc-300 text-[13.5px] sm:text-[14.5px] leading-[1.8] line-clamp-3 font-normal text-pretty">
+                    <p className="mt-3 sm:mt-4 text-zinc-300 text-[13.5px] sm:text-[14.5px] leading-[1.8] line-clamp-3 font-normal text-justify sm:text-left">
                       {item.summary}
                     </p>
 

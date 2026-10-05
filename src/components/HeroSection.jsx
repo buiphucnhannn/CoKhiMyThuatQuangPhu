@@ -5,28 +5,20 @@ import { useEffect, useRef, useState } from "react";
 const LINE_1 = "We are";
 const LINE_2 = "Quảng Phú";
 const TOTAL_CHARS = LINE_1.length + LINE_2.length;
-const TYPE_SPEED = 130;
-const START_DELAY = 550;
+const TYPE_SPEED = 120;
+const START_DELAY = 350;
 
 export default function HeroSection() {
   const [typed, setTyped] = useState(0);
   const titleRef = useRef(null);
   const timersRef = useRef({ start: null, interval: null });
 
-  // Hiệu ứng gõ từng chữ kiểu Sun Bright: chạy chậm rãi rõ nét,
-  // gõ lại từ đầu mỗi khi tiêu đề vào khung nhìn (mới load hay lướt lên/xuống đều thấy)
+  // Hiệu ứng gõ từng chữ kiểu Sun Bright: chạy nhịp nhàng, rõ nét,
+  // hoạt động 100% trên cả Desktop và Mobile
   useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setTyped(TOTAL_CHARS);
-      return;
-    }
-
     const clearTimers = () => {
       if (timersRef.current.start) clearTimeout(timersRef.current.start);
-      if (timersRef.current.interval) clearInterval(timersRef.current.interval);
+      if (timersRef.current.interval) clearTimeout(timersRef.current.interval);
       timersRef.current = { start: null, interval: null };
     };
 
@@ -34,36 +26,47 @@ export default function HeroSection() {
       clearTimers();
       setTyped(0);
       let count = 0;
+
+      const scheduleNext = () => {
+        count += 1;
+        setTyped(count);
+        if (count >= TOTAL_CHARS) {
+          timersRef.current.interval = null;
+          return;
+        }
+        // Khoảng dừng tự nhiên 260ms khi hết dòng 1 ("We are") rồi mới sang dòng 2 ("Quảng Phú")
+        const delay = count === LINE_1.length ? 260 : TYPE_SPEED;
+        timersRef.current.interval = setTimeout(scheduleNext, delay);
+      };
+
       timersRef.current.start = setTimeout(() => {
-        timersRef.current.interval = setInterval(() => {
-          count += 1;
-          setTyped(count);
-          if (count >= TOTAL_CHARS && timersRef.current.interval) {
-            clearInterval(timersRef.current.interval);
-            timersRef.current.interval = null;
-          }
-        }, TYPE_SPEED);
+        timersRef.current.interval = setTimeout(scheduleNext, TYPE_SPEED);
       }, START_DELAY);
     };
 
+    // Khởi chạy gõ chữ ngay khi trang tải xong
+    startTyping();
+
     const el = titleRef.current;
-    if (!el || !("IntersectionObserver" in window)) {
-      startTyping();
+    if (!el || typeof IntersectionObserver === "undefined") {
       return clearTimers;
     }
 
+    let isFirstIntersect = true;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            startTyping();
+            if (!isFirstIntersect) {
+              startTyping();
+            }
+            isFirstIntersect = false;
           } else {
-            clearTimers();
-            setTyped(0);
+            isFirstIntersect = false;
           }
         });
       },
-      { threshold: 0.35 }
+      { threshold: 0.15 }
     );
 
     observer.observe(el);
@@ -79,7 +82,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen min-h-[600px] lg:h-[100dvh] bg-[#0A0B0E] text-white flex items-center justify-center overflow-hidden pt-16 sm:pt-20 pb-4 select-none"
+      className="relative w-full min-h-[100dvh] lg:min-h-0 lg:h-[clamp(650px,100dvh,940px)] xl:h-[clamp(680px,100dvh,980px)] bg-[#0A0B0E] text-white flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-16 pb-12 sm:pb-16 lg:pb-4 select-none"
     >
       {/* ============================================================== */}
       {/* NỀN ĐEN TỐI GIẢN & QUẦNG ĐỎ TINH TẾ PHÍA BIỂU TRƯỢNG THƯƠNG HIỆU */}
@@ -94,30 +97,42 @@ export default function HeroSection() {
 
           {/* CỘT TẢ: TIÊU ĐỀ GÕ TỪNG CHỮ & ĐOẠN VĂN GIỚI THIỆU */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Headline khổng lồ gõ từng chữ chuẩn Sun Bright */}
+            {/* Headline khổng lồ gõ từng chữ chuẩn Sun Bright - Cố định layout 100% không bị giật dòng */}
             <h1
               ref={titleRef}
               aria-label="We are Quảng Phú"
-              className="font-sans font-bold text-white text-[50px] xs:text-[62px] sm:text-[78px] md:text-[90px] lg:text-[98px] xl:text-[110px] leading-[1.02] tracking-tight"
+              className="font-sans font-bold text-white text-[42px] sm:text-[70px] md:text-[90px] lg:text-[98px] xl:text-[110px] leading-[1.06] tracking-tight"
             >
-              <span className="block text-white" aria-hidden="true">
+              {/* DÒNG 1: "We are" */}
+              <span className="block text-white">
                 <span>{LINE_1.slice(0, l1Count)}</span>
-                <span className="text-transparent select-none">
+                {typed <= LINE_1.length && (
+                  <span
+                    className="inline-block w-[3.5px] sm:w-[5px] lg:w-[6px] h-[0.82em] bg-white ml-1.5 sm:ml-2.5 align-baseline"
+                    style={{
+                      animation: "cursorBlink 1s step-start infinite",
+                    }}
+                  />
+                )}
+                <span className="opacity-0 select-none pointer-events-none" aria-hidden="true">
                   {LINE_1.slice(l1Count)}
                 </span>
               </span>
-              <span className="inline-flex items-center text-white mt-1" aria-hidden="true">
+
+              {/* DÒNG 2: "Quảng Phú" - Giữ chỗ sẵn 100% bằng ký tự tàng hình từ frame đầu tiên */}
+              <span className="block text-white mt-1">
                 <span>{LINE_2.slice(0, l2Count)}</span>
-                <span className="text-transparent select-none">
+                {typed > LINE_1.length && (
+                  <span
+                    className="inline-block w-[3.5px] sm:w-[5px] lg:w-[6px] h-[0.82em] bg-white ml-1.5 sm:ml-2.5 align-baseline"
+                    style={{
+                      animation: "cursorBlink 1s step-start infinite",
+                    }}
+                  />
+                )}
+                <span className="opacity-0 select-none pointer-events-none" aria-hidden="true">
                   {LINE_2.slice(l2Count)}
                 </span>
-                {/* Con trỏ nhấp nháy chuẩn Sun Bright */}
-                <span
-                  className="inline-block w-[3.5px] sm:w-[5px] lg:w-[6px] h-[0.8em] bg-white ml-2 sm:ml-3"
-                  style={{
-                    animation: "cursorBlink 1s step-start infinite",
-                  }}
-                />
               </span>
             </h1>
 
@@ -133,7 +148,7 @@ export default function HeroSection() {
             <div className="absolute w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 bg-[#C1121F]/15 rounded-full blur-[70px] pointer-events-none" />
 
             {/* Logo HD siêu nét chuẩn gốc, scale nhỏ lại vừa vặn tinh tế */}
-            <div className="relative w-[210px] h-[210px] sm:w-[280px] sm:h-[280px] lg:w-[340px] lg:h-[340px] xl:w-[380px] xl:h-[380px] select-none flex items-center justify-center p-2">
+            <div className="relative w-[180px] h-[180px] sm:w-[260px] sm:h-[260px] lg:w-[340px] lg:h-[340px] xl:w-[380px] xl:h-[380px] select-none flex items-center justify-center p-2">
               <img
                 src="/images/logo_brand_hd.png"
                 alt="Cơ Khí Mỹ Thuật Quảng Phú"

@@ -143,12 +143,12 @@ export default function ProjectLightboxModal({
       {/* Modal Container */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl bg-[#16171B] border border-white/20 rounded-none overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col"
+        className="relative w-full max-w-4xl bg-[#16171B] border border-white/20 rounded-none overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col max-h-[92vh] overflow-y-auto"
       >
         {/* Header bar: Counter & Close button */}
         <div className="absolute top-4 inset-x-4 z-40 flex items-center justify-between pointer-events-none">
           {activeList.length > 1 ? (
-            <div className="px-3.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[12px] sm:text-[13px] text-[#FDE8B5] font-mono shadow-lg pointer-events-auto">
+            <div className="px-3.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[12px] sm:text-[13px] text-zinc-200 font-mono shadow-lg pointer-events-auto">
               {validIndex + 1} / {activeList.length}
             </div>
           ) : (
@@ -171,10 +171,10 @@ export default function ProjectLightboxModal({
               e.stopPropagation();
               handlePrev();
             }}
-            className="absolute left-3 sm:left-5 top-[38%] -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/65 hover:bg-black/95 text-white flex items-center justify-center border border-white/25 hover:border-[#D4AF37] transition-all hover:scale-110 shadow-2xl cursor-pointer"
+            className="absolute left-2 sm:left-5 top-[38%] -translate-y-1/2 z-30 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-black/65 hover:bg-black/95 text-white flex items-center justify-center border border-white/25 hover:border-[#C1121F] transition-all hover:scale-110 shadow-2xl cursor-pointer"
             aria-label="Xem mục trước"
           >
-            <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+            <ChevronLeft className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
           </button>
         )}
 
@@ -185,10 +185,10 @@ export default function ProjectLightboxModal({
               e.stopPropagation();
               handleNext();
             }}
-            className="absolute right-3 sm:right-5 top-[38%] -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/65 hover:bg-black/95 text-white flex items-center justify-center border border-white/25 hover:border-[#D4AF37] transition-all hover:scale-110 shadow-2xl cursor-pointer"
+            className="absolute right-2 sm:right-5 top-[38%] -translate-y-1/2 z-30 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-black/65 hover:bg-black/95 text-white flex items-center justify-center border border-white/25 hover:border-[#C1121F] transition-all hover:scale-110 shadow-2xl cursor-pointer"
             aria-label="Xem mục tiếp theo"
           >
-            <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+            <ChevronRight className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
           </button>
         )}
 
@@ -224,14 +224,14 @@ export default function ProjectLightboxModal({
         <div className="p-4 sm:p-8 bg-[#16171B] flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 border-t border-white/8">
           <div className="flex-1">
             {currentItem.subtitle && (
-              <span className="text-[#D4AF37] text-xs font-semibold tracking-wider uppercase mb-1.5 block">
+              <span className="text-[#C1121F] text-xs font-semibold tracking-wider uppercase mb-1.5 block">
                 {currentItem.subtitle}
               </span>
             )}
             <h3 className="font-serif text-lg sm:text-2xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               {currentItem.title}
             </h3>
-            <p className="text-zinc-300 text-xs sm:text-sm mt-1.5 sm:mt-2 leading-relaxed max-w-2xl">
+            <p className="text-zinc-300 text-xs sm:text-sm mt-1.5 sm:mt-2 leading-relaxed max-w-2xl text-justify sm:text-left">
               {currentItem.desc ||
                 currentItem.description ||
                 "Công trình cơ khí mỹ thuật tinh hoa do Công ty TNHH Cơ Khí Mỹ Thuật Quảng Phú trực tiếp thiết kế, chế tác và hoàn thiện đúng tiến độ."}
@@ -247,7 +247,7 @@ export default function ProjectLightboxModal({
                 boxShadow: "0 6px 20px rgba(181,24,28,0.45)",
               }}
             >
-              <Phone className="w-4 h-4 fill-current text-[#FFE8A3]" />
+              <Phone className="w-4 h-4 fill-current text-white" />
               <span>Hotline: 0961 031 318</span>
             </a>
           </div>

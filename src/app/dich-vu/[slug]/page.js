@@ -77,13 +77,13 @@ export default function ServiceDetailPage({ params }) {
             </div>
 
             {/* Tiêu đề lớn rực rỡ chuẩn Sunbright Hình 2 */}
-            <h1 className="text-center font-sans font-bold text-white text-[38px] sm:text-[54px] lg:text-[68px] leading-[1.08] tracking-tight max-w-4xl mx-auto">
+            <h1 className="text-center font-sans font-bold text-white text-[26px] sm:text-[46px] lg:text-[68px] leading-[1.08] tracking-tight max-w-4xl mx-auto">
               {currentService.title}
             </h1>
 
             {/* Đoạn văn mô tả sâu sắc, tâm huyết giữa trang */}
             <div className="max-w-3xl mx-auto mt-8 sm:mt-10 text-center">
-              <p className="text-zinc-300 text-[15px] sm:text-[16.5px] leading-[1.85] font-normal text-pretty">
+              <p className="text-zinc-300 text-[14.5px] sm:text-[16.5px] leading-[1.85] font-normal text-justify sm:text-center px-1 sm:px-0">
                 {currentService.detailedQuote}
               </p>
             </div>
@@ -134,7 +134,7 @@ export default function ServiceDetailPage({ params }) {
                 <span className="text-[#C1121F] text-xs font-mono font-bold uppercase tracking-[0.25em] mb-3 block">
                   TIÊU CHUẨN CHẾ TÁC ĐỘC BẢN
                 </span>
-                <h2 className="text-white font-bold text-[28px] sm:text-[34px] lg:text-[38px] leading-tight tracking-tight mb-6">
+                <h2 className="text-white font-bold text-[22px] sm:text-[34px] lg:text-[38px] leading-tight tracking-tight mb-6">
                   Tinh hoa cơ khí mỹ thuật & bản sắc trường tồn
                 </h2>
 

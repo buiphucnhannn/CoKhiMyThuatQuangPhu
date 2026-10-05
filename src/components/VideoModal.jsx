@@ -34,7 +34,7 @@ export default function VideoModal({ isOpen, onClose }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl bg-[#141519] border border-white/20 rounded-none overflow-hidden shadow-2xl cursor-default"
+        className="relative w-full max-w-4xl bg-[#141519] border border-white/20 rounded-none overflow-hidden shadow-2xl cursor-default max-h-[90vh] overflow-y-auto"
       >
         {/* Close Button */}
         <button
@@ -69,7 +69,7 @@ export default function VideoModal({ isOpen, onClose }) {
               <Volume2 className="w-4 h-4 text-zinc-300" />
             </div>
             <div className="flex items-center gap-2 text-zinc-300 text-[11px]">
-              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              <ShieldCheck className="w-4 h-4 text-[#C1121F]" />
               <span>Chất lượng hình ảnh 4K HDR</span>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function VideoModal({ isOpen, onClose }) {
             <h4 className="font-serif text-base sm:text-lg font-bold text-white">
               Hành Trình Chế Tác Xe Nghi Trượng Cho Các Dịp Đại Lễ Cấp Quốc Gia
             </h4>
-            <p className="text-xs text-zinc-400 mt-1">
+            <p className="text-xs text-zinc-400 mt-1 text-justify sm:text-left">
               Ghi lại quá trình thiết kế kết cấu, gò đúc chi tiết đồng nghệ thuật và nghiệm thu trực tiếp trên quảng trường Ba Đình.
             </p>
           </div>
